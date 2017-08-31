@@ -4,7 +4,7 @@
 
 ようこそ！Deep Learning 導入のためのトレーニングガイドへ！こちらではNVIDIAより提供されている **[DIGITS](https://github.com/NVIDIA/DIGITS)** と **[Jetson TX1/TX2](http://www.nvidia.com/object/embedded-systems.html)** を活用し、Deep Learningの推論と[deep vision](https://rawgit.com/dusty-nv/jetson-inference/master/docs/html/index.html) ランタイムライブラリについてのトレーニングガイドを記載します。
 
-このレポートは
+このレポートはNVIDIA **[TensorRT](https://developer.nvidia.com/tensorrt)** を使って、組み込みプラットフォームにニューラルネットワークを効率的に導入し
 
 This repo uses NVIDIA **[TensorRT](https://developer.nvidia.com/tensorrt)** for efficiently deploying neural networks onto the embedded platform, improving performance and power efficiency using graph optimizations, kernel fusion, and half-precision FP16 on the Jetson.
 
