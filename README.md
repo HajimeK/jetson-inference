@@ -1,12 +1,12 @@
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/deep-vision-header.jpg">
 
-# Deep Learningの導入
+# Deep Learningの導入へ
 
 ようこそ！Deep Learning 導入のためのトレーニングガイドへ！こちらではNVIDIAより提供されている **[DIGITS](https://github.com/NVIDIA/DIGITS)** と **[Jetson TX1/TX2](http://www.nvidia.com/object/embedded-systems.html)** を活用し、Deep Learningの推論と[deep vision](https://rawgit.com/dusty-nv/jetson-inference/master/docs/html/index.html) ランタイムライブラリについてのトレーニングガイドを記載します。
 
-このレポートはNVIDIA **[TensorRT](https://developer.nvidia.com/tensorrt)** を使って、組み込みプラットフォームにニューラルネットワークを効率的に導入し
+このレポートはNVIDIA **[TensorRT](https://developer.nvidia.com/tensorrt)** を使って、組み込みプラットフォームにニューラルネットワークを効率的に導入し、グラフ最適化、カーネルフュージョン、半精度（FP16)を使って電力効率とパフォーマンスの向上を実現します。
 
-This repo uses NVIDIA **[TensorRT](https://developer.nvidia.com/tensorrt)** for efficiently deploying neural networks onto the embedded platform, improving performance and power efficiency using graph optimizations, kernel fusion, and half-precision FP16 on the Jetson.
+
 
 Vision primitives, such as [`imageNet`](imageNet.h) for image recognition, [`detectNet`](detectNet.h) for object localization, and [`segNet`](segNet.h) for segmentation, inherit from the shared [`tensorNet`](tensorNet.h) object.  Examples are provided for streaming from live camera feed and processing images from disk.  See the **[Deep Vision API Reference Specification](https://rawgit.com/dusty-nv/jetson-inference/master/docs/html/index.html)** for accompanying documentation. 
 
