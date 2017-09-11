@@ -6,9 +6,7 @@
 
 このレポートはNVIDIA **[TensorRT](https://developer.nvidia.com/tensorrt)** を使って、組み込みプラットフォームにニューラルネットワークを効率的に導入し、グラフ最適化、カーネルフュージョン、半精度（FP16)を使って電力効率とパフォーマンスの向上を実現します。
 
-
-
-Vision primitives, such as [`imageNet`](imageNet.h) for image recognition, [`detectNet`](detectNet.h) for object localization, and [`segNet`](segNet.h) for segmentation, inherit from the shared [`tensorNet`](tensorNet.h) object.  Examples are provided for streaming from live camera feed and processing images from disk.  See the **[Deep Vision API Reference Specification](https://rawgit.com/dusty-nv/jetson-inference/master/docs/html/index.html)** for accompanying documentation. 
+画像認識の為の[`imageNet`](imageNet.h)、オブジェクト検出のための[`detectNet`](detectNet.h) 、セグメンテーションのための[`segNet`](segNet.h)などのビジョンプリミティブは共有の [`tensorNet`](tensorNet.h) オブジェクトから継承されています。ライブカメラからのストリーミングやディスクからの画像処理の例が提供されています。付随するドキュメントについては**[Deep Vision API Reference Specification](https://rawgit.com/dusty-nv/jetson-inference/master/docs/html/index.html)** を参照してください。
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/deep-vision-primitives.png" width="800">
 
