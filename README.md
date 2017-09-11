@@ -11,7 +11,7 @@
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/deep-vision-primitives.png" width="800">
 
 > &gt; &nbsp; 最新情報は こちらの投稿**[Parallel ForAll post](https://devblogs.nvidia.com/parallelforall/jetpack-doubles-jetson-inference-perf/)**　をご参照ください。　*JetPack 3.1　による推論性能の低レイテンシーの向上 *. <br/>
-> &gt; &nbsp; See **[Image Segmentation](#image-segmentation-with-segnet)** モデルとドローンデータセットによるトレーニングガイドはこちらのリンクをご参照ください。 <br/>
+> &gt; &nbsp;  イメージセグメンテーションモデルとドローンデータセットによるトレーニングガイドはこちらのリンクをご参照ください。**[Image Segmentation](#image-segmentation-with-segnet)**  <br/>
 > &gt; &nbsp; Try **[Object Detection](#locating-object-coordinates-using-detectnet)** training guide using DIGITS & MS-COCO training dataset. <br/>
 > &gt; &nbsp; Use **[Image Recognition](#re-training-the-network-with-digits)** training guide using DIGITS & ImageNet ILSVRC12 dataset.
 
