@@ -69,7 +69,7 @@ Note ： 本サイトのTensorRT サンプルは Jetson TX1/TX2 モジュール�
 
 ## DIGITS Workflow
 
-Deep Neural Network (DNNs)と機械学習を体験するのは初めてでしょうか？　そうであればこちらの入門書を使って学習と推論を初めていきましょう。
+Deep Neural Network (DNNs)と機械学習を体験するのは初めてでしょうか？　そうであれば学習と推論についてこちらの[入門書](docs/deep-learning.md)をご覧ください
 
 New to deep neural networks (DNNs) and machine learning?  Take this [introductory primer](docs/deep-learning.md) on training and inference.
 
