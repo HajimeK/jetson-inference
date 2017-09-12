@@ -8,14 +8,11 @@
 それが　**学習（training）**　と　**推論（inference）** です。
 
 #### 学習　Training
-学習のフェーズでは、　ネットワークにラベル付きの大量のデータセットを学ばせます。　ニューラルネットワークの重みは学習用のデータセットに含まれるパターンによって認識できるよう最適化されます。Deep neural network はニューロン同士を結合させた多数の層で構成されています。
-
-
-During the training phase, the network learns from a large dataset of labeled examples.  The weights of the neural network become optimized to recognize the patterns contained within the training dataset.  Deep neural networks have many layers of neurons connected togethers.  Deeper networks take increasingly longer to train and evaluate, but are ultimately able to encode more intelligence within them.
+学習のフェーズでは、ネットワークにラベル付きの大量のデータセットを学ばせます。ニューラルネットワークの重みは学習用のデータセットに含まれるパターンによって認識できるよう最適化されます。Deep neural network はニューロン同士を結合させた多数の層で構成されています。 より深いネットワークでは、訓練と検証により多くの時間がかかりますが、より多くの情報を検出することが可能です。
 
 ![Alt text](https://a70ad2d16996820e6285-3c315462976343d903d5b3a03b69072d.ssl.cf2.rackcdn.com/fd4ba9e7e68b76fc41c8312856c7d0ad)
 
-Throughout training, the network's inference performance is tested and refined using trial dataset. Like the training dataset, the trial dataset is labeled with ground-truth so the network's accuracy can be evaluated, but was not included in the training dataset.  The network continues to train iteratively until it reaches a certain level of accuracy set by the user.
+トレーニング中、ネットワークの推論性能は訓練データセットをつかってテストされて精度向上をしていきます。トレーニングデータセットと同様に、訓練データセットは正解データをラベル付けされており、トレーニングデータセットには含まれていない為ネットワークの精度を評価できます。ネットワークはユーザーによって設定された一定の精度レベルに達するまで、繰り返し訓練を続けます。
 
 Due to the size of the datasets and deep inference networks, training is typically very resource-intensive and can take weeks or months on traditional compute architectures.  However, using GPUs vastly accellerates the process down to days or hours.  
 
