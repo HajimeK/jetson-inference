@@ -1,10 +1,11 @@
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/deep-vision-header.jpg">
 
-# What's Deep Learning?
+# Deep Learningとは?
 
 ### Introduction
 
-*Deep-learning* networks typically have two primary phases of development:   **training** and **inference**
+*Deep-learning*ネットワークの開発には主に二つのフェーズが必要です。　それが　**学習（training）**　と　**推論（inference）** です。
+*Deep-learning* networks typically have two primary phases of development:   **training** and **inference**
 
 #### Training
 During the training phase, the network learns from a large dataset of labeled examples.  The weights of the neural network become optimized to recognize the patterns contained within the training dataset.  Deep neural networks have many layers of neurons connected togethers.  Deeper networks take increasingly longer to train and evaluate, but are ultimately able to encode more intelligence within them.
