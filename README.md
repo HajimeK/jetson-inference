@@ -65,9 +65,11 @@
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;> Jetson TX1 - JetPack 2.3 / L4T R24.2 aarch64 (Ubuntu 16.04 LTS) <br/>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;> Jetson TX1 - JetPack 2.3.1 / L4T R24.2.1 aarch64 (Ubuntu 16.04 LTS)
 
-Note that TensorRT samples from the repo are intended for deployment on embedded Jetson TX1/TX2 module, however when cuDNN and TensorRT have been installed on the host side, the TensorRT samples in the repo can be compiled for PC.
+Note ： 本サイトのTensorRT サンプルは Jetson TX1/TX2 モジュールへの使用を前提に記載されておりますが、ホストPCにcuDNNとTensorRTをインストールすることで、ホストPCでのコンパイルも可能です。
 
 ## DIGITS Workflow
+
+Deep Neural Network (DNNs)と機械学習を体験するのは初めてでしょうか？　そうであればこちらの入門書を使って学習と推論を初めていきましょう。
 
 New to deep neural networks (DNNs) and machine learning?  Take this [introductory primer](docs/deep-learning.md) on training and inference.
 
