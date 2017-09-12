@@ -11,9 +11,9 @@
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/deep-vision-primitives.png" width="800">
 
 > &gt; &nbsp; 最新情報は こちらの投稿**[Parallel ForAll post](https://devblogs.nvidia.com/parallelforall/jetpack-doubles-jetson-inference-perf/)**　をご参照ください。　*JetPack 3.1　による推論性能の低レイテンシーの向上 *. <br/>
-> &gt; &nbsp;  イメージセグメンテーションモデルとドローンデータセットによるトレーニングガイドはこちらのリンク**[Image Segmentation](#image-segmentation-with-segnet)** をご参照ください。 <br/>
-> &gt; &nbsp; DIGITS & MS-COCO トレーニングデータセットを活用した物体検出のトレーニングガイドはこちら**[Object Detection](#locating-object-coordinates-using-detectnet)** をご参照ください。
-> &gt; &nbsp; DIGITS & ImageNet ILSVRC12 datasetを活用した画像認識のトレーニングガイドはこちら**[Image Recognition](#re-training-the-network-with-digits)** をご参照ください。
+> &gt; &nbsp;  イメージセグメンテーションモデルとドローンデータセットによるトレーニングガイドはこちらのリンク **[Image Segmentation](#image-segmentation-with-segnet)** をご参照ください。 <br/>
+> &gt; &nbsp; DIGITS & MS-COCO トレーニングデータセットを活用した物体検出のトレーニングガイドはこちら **[Object Detection](#locating-object-coordinates-using-detectnet)** をご参照ください。
+> &gt; &nbsp; DIGITS & ImageNet ILSVRC12 datasetを活用した画像認識のトレーニングガイドはこちら **[Image Recognition](#re-training-the-network-with-digits)** をご参照ください。
 ### **Table of Contents**
 
 * [DIGITS Workflow](#digits-workflow) 
@@ -52,10 +52,10 @@
 
 **Recommended System Requirements**
 
-Training GPU:  Maxwell or Pascal-based GPU or AWS P2 instance.  
+学習環境 GPU:  Maxwell or Pascal-based GPU or AWS P2 instance.  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ubuntu 14.04 x86_64 or Ubuntu 16.04 x86_64 (see DIGITS [AWS AMI](https://aws.amazon.com/marketplace/pp/B01LZN28VD) image).
 
-Deployment:    &nbsp;&nbsp;Jetson TX2 Developer Kit with JetPack 3.0 or newer (Ubuntu 16.04 aarch64).  
+推論動作環境:    &nbsp;&nbsp;Jetson TX2 Developer Kit with JetPack 3.0 or newer (Ubuntu 16.04 aarch64).  　
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jetson TX1 Developer Kit with JetPack 2.3 or newer (Ubuntu 16.04 aarch64).
 
 > **note**:  this [branch](http://github.com/dusty-nv/jetson-inference) is verified against the following BSP versions for Jetson TX1/TX2: <br/>
