@@ -8,7 +8,8 @@
 それが　**学習（training）**　と　**推論（inference）** です。
 
 #### 学習　Training
-学習のフェーズでは、　ネットワークにラベル付きの大量のデータセットを学ばせます。　ニューラルネットワークの重みは学習用のデータセットに含まれるパターンによって認識できるよう最適化されます。Deep neural network は
+学習のフェーズでは、　ネットワークにラベル付きの大量のデータセットを学ばせます。　ニューラルネットワークの重みは学習用のデータセットに含まれるパターンによって認識できるよう最適化されます。Deep neural network はニューロン同士を結合させた多数の層で構成されています。
+
 
 During the training phase, the network learns from a large dataset of labeled examples.  The weights of the neural network become optimized to recognize the patterns contained within the training dataset.  Deep neural networks have many layers of neurons connected togethers.  Deeper networks take increasingly longer to train and evaluate, but are ultimately able to encode more intelligence within them.
 
