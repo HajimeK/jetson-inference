@@ -4,10 +4,12 @@
 
 ### Introduction
 
-*Deep-learning*ネットワークの開発には主に二つのフェーズが必要です。　それが　**学習（training）**　と　**推論（inference）** です。
-*Deep-learning* networks typically have two primary phases of development:   **training** and **inference**
+*Deep-learning*ネットワークの開発には主に二つのフェーズが必要です。
+それが　**学習（training）**　と　**推論（inference）** です。
 
-#### Training
+#### 学習　Training
+学習のフェーズでは、　ネットワークにラベル付きの大量のデータセットを学ばせます。　ニューラルネットワークの重みは学習用のデータセットに含まれるパターンによって認識できるよう最適化されます。Deep neural network は
+
 During the training phase, the network learns from a large dataset of labeled examples.  The weights of the neural network become optimized to recognize the patterns contained within the training dataset.  Deep neural networks have many layers of neurons connected togethers.  Deeper networks take increasingly longer to train and evaluate, but are ultimately able to encode more intelligence within them.
 
 ![Alt text](https://a70ad2d16996820e6285-3c315462976343d903d5b3a03b69072d.ssl.cf2.rackcdn.com/fd4ba9e7e68b76fc41c8312856c7d0ad)
