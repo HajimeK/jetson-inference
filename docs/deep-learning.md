@@ -18,21 +18,21 @@ Deep Leaningで使うデータセットと深いネットワークサイズの�
 ##### DIGITS
 
 [DIGITS](https://developer.nvidia.com/digits) を使うとGPUアクセラレーションで誰でも簡単にニューラルネットワークをトレーニングする事ができます。
+DIGITSはNVIDIAが提供するオープンソースプロジェクトで、こちらのHPより入手できます。 https://github.com/NVIDIA/DIGITS.
 
-Using [DIGITS](https://developer.nvidia.com/digits), anyone can easily get started and interactively train their networks with GPU acceleration.  <br />DIGITS is an open-source project contributed by NVIDIA, located here: https://github.com/NVIDIA/DIGITS. 
-
-This tutorial will use DIGITS and Jetson TX1 together for training and deploying deep-learning networks, <br />refered to as the DIGITS workflow:
+このチュートリアルでは、DIGITSワークフローと呼ばれるディープ学習ネットワークのトレーニングとトレーニングのために、DIGITSとJetson TX1を一緒に使用します。
 
 ![Alt text](https://a70ad2d16996820e6285-3c315462976343d903d5b3a03b69072d.ssl.cf2.rackcdn.com/90bde1f85a952157b914f75a9f8739c2)
 
 
-#### Inference
-Using it's trained weights, the network evaluates live data at runtime.  Called inference, the network predicts and applies reasoning based off the examples it learned.  Due to the depth of deep learning networks, inference requires significant compute resources to process in realtime on imagery and other sensor data.  However, using NVIDIA's GPU Inference Engine which uses Jetson's integrated NVIDIA GPU, inference can be deployed onboard embedded platforms.  Applications in robotics like picking, autonomous navigation, agriculture, and industrial inspection have many uses for deploying deep inference, including:
+#### 推論　（Inference）
+訓練された重みによって、ネットワークは実行時に入力データを判定します。　推論（Inference）と呼ばれるこのネットワークの処理は、学習した例に基づい推論を出力します。Deep Learning ネットワークが深いため、推論は画像および他のセンサデータ上でリアルタイムで処理するために、かなりの計算リソースを必要とします。しかし、Jetsonに搭載されたNVIDIA GPUを使用するGPU推論エンジンを活用して、推論をオンボードの組み込みプラットフォームに導入することができます。
+自律航法、農業、産業検査などのロボット工学のアプリケーションには、組み込みプラットフォーム（Jetson)に導入された推論を活用する用途があります。
 
-  - Image recognition
-  - Object detection
-  - Segmentation 
-  - Image registration (homography estimation)
-  - Depth from raw stereo
-  - Signal analytics
-  
+  - 画像認識　（Image recognition）
+  - 物体検出　（Object detection）
+  - セグメンテーション　（Segmentation） 
+  - 画像登録　（Image registration (homography estimation)）
+  - ステレオカメラからの深さ認識　（Depth from raw stereo）
+  - 信号解析　（Signal analytics）
+  
