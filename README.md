@@ -76,27 +76,24 @@ Deep Neural Network (DNNs)と機械学習を体験するのは初めてでしょ
 
 NVIDIAのDeep Learingツールを使って、とても簡単にDNNのトレーニングとハイパフォーマンスなDNNの導入を**開始(https://github.com/NVIDIA/DIGITS/blob/master/docs/GettingStarted.md)** することができます。Tesla等のディスクリートGPUはDIGITSをつかったトレーニングのためサーバーやPCまたはノートブックで使用され、JetsonなどのインテグレートGPUが推論用途として組み込みプラットフォームで活用されます。
 
-
-Using NVIDIA deep learning tools, it's easy to **[Get Started](https://github.com/NVIDIA/DIGITS/blob/master/docs/GettingStarted.md)** training DNNs and deploying them into the field with high performance.  Discrete GPUs are typically used in a server, PC, or laptop for training with DIGITS, while Jetson and integrated GPU is used by embedded form factors.
-
 <a href="https://github.com/dusty-nv/jetson-inference/blob/master/docs/deep-learning.md"><img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/digits-workflow.jpg" width="700"></a>
 
-NVIDIA [DIGITS](https://github.com/NVIDIA/DIGITS) is used to interactively train network models on annotated datasets in the cloud or PC, while TensorRT and Jetson are used to deploy runtime inference in the field. TensorRT uses graph optimizations and half-precision FP16 support to more than double DNN inferencing.  Together, DIGITS and TensorRT form an effective workflow for developing and deploying deep neural networks capable of implementing advanced AI and perception. 
+NVIDIAの [DIGITS](https://github.com/NVIDIA/DIGITS) は、クラウドやPCの注釈付きデータセットでネットワークモデルを対話的にトレーニングするために使用され、TensorRTとJetsonは、現場で実行する推論を導入するために使用されます。TensorRTは、グラフ最適化と半精度FP16サポートを使用して、2倍以上のDNN推論処理を行います。DIGITSとTensorRTは、高度なAIと知覚を実装できる深いニューラルネットワークの開発と展開のための効果的なワークフローを形成します。
 
 ## System Setup
 
-During this tutorial, we will use a host PC (or AWS), for training DNNs, alongside a Jetson for inference.  The host PC will also serve to flash the Jetson with the latest JetPack.  First we'll setup and configure the host PC with the required OS and tools.
+このチュートリアルでは　ホストPC（or AWS) をDNNのトレーニングに使い、推論にJetsonを使います。ホストPCは、最新のJetPackでJetsonをフラッシュする役割もあります。まず、必要なOSとツールを使用してホストPCをセットアップして設定します。
 
-### Installing Ubuntu on the Host
+### ホストPCに Ubuntuをインストール
 
-Download and install Ubuntu 16.04 x86_64 onto the host PC from one of the following locations:
+下記よりホストPCにUbuntu 16.04 x86_64をダウンロードしインストールしてください。
 
 ```
 http://releases.ubuntu.com/16.04/ubuntu-16.04.2-desktop-amd64.iso
 http://releases.ubuntu.com/16.04/ubuntu-16.04.2-desktop-amd64.iso.torrent
 ```
 
-Ubuntu 14.04 x86_64 may also be acceptable with minor modifications later while installing some packages with apt-get.
+Ubuntu 14.04 x86_64は、apt-getでいくつかのパッケージをインストールする際に、後で少し修正しても問題ありません。
 
 ### Running JetPack on the Host
 
