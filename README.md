@@ -74,7 +74,7 @@ Deep Neural Network (DNNs)と機械学習を体験するのは初めてでしょ
 
 <a href="https://github.com/dusty-nv/jetson-inference/blob/master/docs/deep-learning.md"><img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/digits-samples.jpg" width="800"></a>
 
-NVIDIAのDeep Learingツールを使って、とても簡単にDNNのトレーニングとハイパフォーマンスを備えたDNNを市場に投入できます。通常　GPUが搭載されたサーバーやPCまたはノートブックで
+NVIDIAのDeep Learingツールを使って、とても簡単にDNNのトレーニングとハイパフォーマンスなDNNの導入を**開始(https://github.com/NVIDIA/DIGITS/blob/master/docs/GettingStarted.md)** することができます。Tesla等のディスクリートGPUはDIGITSをつかったトレーニングのためサーバーやPCまたはノートブックで使用され、JetsonなどのインテグレートGPUが推論用途として組み込みプラットフォームで活用されます。
 
 
 Using NVIDIA deep learning tools, it's easy to **[Get Started](https://github.com/NVIDIA/DIGITS/blob/master/docs/GettingStarted.md)** training DNNs and deploying them into the field with high performance.  Discrete GPUs are typically used in a server, PC, or laptop for training with DIGITS, while Jetson and integrated GPU is used by embedded form factors.
