@@ -50,7 +50,7 @@
 	* [FCN-Alexnet Patches for TensorRT](#fcn-alexnet-patches-for-tensorrt)
 	* [Running Segmentation Models on Jetson](#running-segmentation-models-on-jetson)
 
-**Recommended System Requirements**
+**推奨システム環境**
 
 学習環境 GPU:  Maxwell or Pascal-based GPU or AWS P2 instance.  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ubuntu 14.04 x86_64 or Ubuntu 16.04 x86_64 (see DIGITS [AWS AMI](https://aws.amazon.com/marketplace/pp/B01LZN28VD) image).
@@ -71,9 +71,11 @@ Note ： 本サイトのTensorRT サンプルは Jetson TX1/TX2 モジュール�
 
 Deep Neural Network (DNNs)と機械学習を体験するのは初めてでしょうか？　そうであれば学習と推論についてこちらの[入門書](docs/deep-learning.md)をご覧ください
 
-New to deep neural networks (DNNs) and machine learning?  Take this [introductory primer](docs/deep-learning.md) on training and inference.
 
 <a href="https://github.com/dusty-nv/jetson-inference/blob/master/docs/deep-learning.md"><img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/digits-samples.jpg" width="800"></a>
+
+NVIDIAのDeep Learingツールを使って、とても簡単にDNNのトレーニングとハイパフォーマンスを備えたDNNを市場に投入できます。通常　GPUが搭載されたサーバーやPCまたはノートブックで
+
 
 Using NVIDIA deep learning tools, it's easy to **[Get Started](https://github.com/NVIDIA/DIGITS/blob/master/docs/GettingStarted.md)** training DNNs and deploying them into the field with high performance.  Discrete GPUs are typically used in a server, PC, or laptop for training with DIGITS, while Jetson and integrated GPU is used by embedded form factors.
 
