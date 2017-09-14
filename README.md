@@ -65,7 +65,7 @@
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;> Jetson TX1 - JetPack 2.3 / L4T R24.2 aarch64 (Ubuntu 16.04 LTS) <br/>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;> Jetson TX1 - JetPack 2.3.1 / L4T R24.2.1 aarch64 (Ubuntu 16.04 LTS)
 
-Note ： 本サイトのTensorRT サンプルは Jetson TX1/TX2 モジュールへの使用を前提に記載されておりますが、ホストPCにcuDNNとTensorRTをインストールすることで、ホストPCでのコンパイルも可能です。
+Note ： 本サイトのTensorRT サンプルは Jetson TX1/TX2 モジュールへの使用を前提に記載されておりますが、ホストPCにcuDNNとTensorRTをインストールすることで、ホストPCでコンパイルも可能です。
 
 ## DIGITS Workflow
 
