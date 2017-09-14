@@ -95,11 +95,12 @@ http://releases.ubuntu.com/16.04/ubuntu-16.04.2-desktop-amd64.iso.torrent
 
 Ubuntu 14.04 x86_64は、apt-getでいくつかのパッケージをインストールする際に、後で少し修正しても問題ありません。
 
-### Running JetPack on the Host
+### ホストPC上で　JetPachの実行
 
-Download the latest **[JetPack](https://developer.nvidia.com/embedded/jetpack)** to the host PC.  In addition to flashing the Jetson with the latest Board Support Package (BSP), JetPack automatically installs tools for the host like CUDA Toolkit.  See the JetPack [Release Notes](https://developer.nvidia.com/embedded/jetpack-notes) for the full list of features and installed packages.
+最新の **[JetPack](https://developer.nvidia.com/embedded/jetpack)** をホストPCにダウンロードしてください。最新のBoard Support Package（BSP）でJetsonをフラッシュさせることに加えて、JetPackは自動的にCUDA Toolkitのようなホスト用のツールをインストールします。
+機能とインストールされているパッケージのリストについては、JetPack [リリースノート]（https://developer.nvidia.com/embedded/jetpack-notes）　を参照してください。
 
-After downloading JetPack from the link above, run it from the host PC with the following commands:
+上記のリンクからJetPackをダウンロードした後、以下のコマンドでホストPCからJetPackを実行してください：
 
 ``` bash 
 $ cd <directory where you downloaded JetPack>
@@ -107,16 +108,16 @@ $ chmod +x JetPack-L4T-3.1-linux-x64.run
 $ ./JetPack-L4T-3.1-linux-x64.run 
 ```
 
-The JetPack GUI will start.  Follow the step-by-step **[Install Guide](http://docs.nvidia.com/jetpack-l4t/index.html#developertools/mobile/jetpack/l4t/3.0/jetpack_l4t_install.htm)** to complete the setup.  Near the beginning, JetPack will confirm which generation Jetson you are developing for.
+JetPack GUIが開始されます。**[Install Guide](http://docs.nvidia.com/jetpack-l4t/index.html#developertools/mobile/jetpack/l4t/3.0/jetpack_l4t_install.htm)** に記載の手順に従ってセットアップを完了させて下さい。JetPackは最初、あなたが開発しているJetsonの世代を確認します。
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/jetpack-platform.png" width="450">
 
-Select Jetson TX1 if you are using TX1, or Jetson TX2 if you're using TX2, and press `Next` to continue.
-
-The next screen will list the packages available to be installed.  The packages installed to the host are listed at the top under the `Host - Ubuntu` dropdown, while those intended for the Jetson are shown near the bottom.  You can select or deselect an individual package for installation by clicking it's `Action` column.
+お使いのJetson TX1もしくはTX2を選択し、`Next`をおして進みます。
+次の画面でインストール可能なパッケージのリストが確認できます。ホストにインストールされたパッケージは `Host-Ubuntu`の下の一番上に表示され、Jetsonのパッケージは一番下に表示されます。`Action`カラムをクリックすることで、インストールする個々のパッケージを選択または選択解除することができます。
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/jetpack-downloads.png" width="500">
 
+CUDAはDNNのトレーニングにホストで使用されるため、右上のラジオボタンをクリックしてフルインストールを選択することをお勧めします。次に、`Next`を押してセットアップを開始します。
 Since CUDA will be used on the host for training DNNs, it's recommended to select the Full install by click on the radio button in the top right.  Then press `Next` to begin setup.  JetPack will download and then install the sequence of packages.  Note that all the .deb packages are stored under the `jetpack_downloads` subdirectory if you are to need them later.  
 
 After the downloads have finished installing, JetPack will enter the post-install phase where the JetPack is flashed with the L4T BSP.  You'll need to connect your Jetson to your host PC via the micro-USB port and cable included in the devkit.  Then enter your Jetson into recovery mode by holding down the Recovery button while pressing and releasing Reset.  If you type `lsusb` from the host PC after you've connected the micro-USB cable and entered the Jetson into recovery mode, you should see the NVIDIA device come up under the list of USB devices.  JetPack uses the micro-USB connection from the host to flash the L4T BSP to the Jetson.  
