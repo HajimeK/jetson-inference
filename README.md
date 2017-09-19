@@ -232,31 +232,34 @@ DIGITSは `digits / jobs`ディレクトリの下にユーザジョブ（トレ�
 
 > **note**:　デフォルトではDIGITSサーバはポート5000から起動しますが、ポートは `--port`引数を` digits-devserver`スクリプトに渡すことで指定できます。
 
-## Building from Source on Jetson
-Provided along with this repo are TensorRT-enabled deep learning primitives for running Googlenet/Alexnet on live camera feed for image recognition, pedestrian detection networks with localization capabilities (i.e. that provide bounding boxes), and segmentation.  This repo is intended to be built & run on the Jetson and to accept the network models from the host PC trained on the DIGITS server.
+## Jetson上でソースからのビルド
 
-The latest source can be obtained from [GitHub](http://github.com/dusty-nv/jetson-inference) and compiled onboard Jetson TX1/TX2.
+このレポートでは、画像認識のためのライブカメラフィード、ローカライゼーション能力を有する歩行者検出ネットワーク（すなわち、境界ボックスの提供）、およびセグメンテーションのためにGooglenet / Alexnetを実行するためのTensorRT対応ディープ学習プリミティブが提供される。 このレポートは、Jetson上に構築されて実行され、DIGITSサーバーでトレーニングされたホストPCからネットワークモデルを受け入れることを目的としています。
 
-> **note**:  this [branch](http://github.com/dusty-nv/jetson-inference) is verified against the following BSP versions for Jetson TX1/TX2: <br/>
+最新のソースは[GitHub]（http://github.com/dusty-nv/jetson-inference）から入手し、Jetson TX1 / TX2でコンパイルできます。
+
+> **note**: 　このブランチ（https://github.com/TKO-mac/jetson-inference）　は、Jetson TX1 / TX2の次のBSPバージョンに対して検証されています。　<br/>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;> Jetson TX2 - JetPack 3.0 / L4T R27.1 aarch64 (Ubuntu 16.04 LTS) <br/>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;> Jetson TX1 - JetPack 2.3 / L4T R24.2 aarch64 (Ubuntu 16.04 LTS) <br/>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;> Jetson TX1 - JetPack 2.3.1 / L4T R24.2.1 aarch64 (Ubuntu 16.04 LTS)
       
-#### Cloning the Repo
-To obtain the repository, navigate to a folder of your choosing on the Jetson.  First, make sure git and cmake are installed locally:
+#### このレポートのクローン
+
+リポジトリを取得するには、Jetsonで選択したフォルダに移動します。まず、gitとcmakeがローカルにインストールされていることを確認します。
 
 ``` bash
 $ sudo apt-get install git cmake
 ```
 
-Then clone the jetson-inference repo:
+次にこのjetson-inferenceのレポートをクローンします。
+
 ``` bash
 $ git clone http://github.com/dusty-nv/jetson-inference
 ```
 
-#### Configuring with CMake
+#### CMakeで設定
 
-When cmake is run, a special pre-installation script (CMakePreBuild.sh) is run and will automatically install any dependencies.
+cmakeを実行すると、特別なpre-installation スクリプト（CMakePreBuild.sh）が実行され、自動的に依存関係がインストールされます。
 
 ``` bash
 $ cd jetson-inference
@@ -265,18 +268,18 @@ $ cd build
 $ cmake ../
 ```
 
-> **note**: the cmake command will launch the CMakePrebuild.sh script which asks for sudo while making sure prerequisite packages have been installed on the Jetson. The script also downloads the network model snapshots from web services.
+> **note**: cmakeコマンドはCMakePrebuild.shスクリプトを起動し、Jetsonに必要なパッケージがインストールされていることを確認しながらsudoを求めます。スクリプトは、Webサービスからネットワークモデルのスナップショットもダウンロードします。
 
-#### Compiling the Project
+#### プロジェクトのコンパイル
 
-Make sure you are still in the jetson-inference/build directory, created above in step #2.
+Step2で作成したjetson-inference / buildディレクトリにて下記を実行してください。
 
 ``` bash
 $ cd jetson-inference/build			# omit if pwd is already /build from above
 $ make
 ```
 
-Depending on architecture, the package will be built to either armhf or aarch64, with the following directory structure:
+アーキテクチャに応じて、パッケージはarmhfまたはaarch64のいずれかにビルドされ、次のディレクトリ構造になります。
 
 ```
 |-build
@@ -290,7 +293,7 @@ Depending on architecture, the package will be built to either armhf or aarch64,
       \lib			where the libraries are build to
 ```
 
-binaries residing in aarch64/bin, headers in aarch64/include, and libraries in aarch64/lib.
+バイナリはaarch64 / bin　の中、ヘッダはaarch64 / includeの中、ライブラリはaarch64 / libの中に格納されます。
 
 #### Digging Into the Code
 
