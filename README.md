@@ -93,7 +93,7 @@ http://releases.ubuntu.com/16.04/ubuntu-16.04.2-desktop-amd64.iso
 http://releases.ubuntu.com/16.04/ubuntu-16.04.2-desktop-amd64.iso.torrent
 ```
 
-Ubuntu 14.04 x86_64は、apt-getでいくつかのパッケージをインストールする際に、後で少し修正しても問題ありません。
+Ubuntu 14.04 x86_64は、apt-getでいくつかのパッケージをインストールする際に、後で修正しても問題ありません。
 
 ### ホストPC上で　JetPachの実行
 
@@ -117,14 +117,14 @@ JetPack GUIが開始されます。**[Install Guide](http://docs.nvidia.com/jetp
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/jetpack-downloads.png" width="500">
 
-CUDAはDNNのトレーニングにホストで使用されるため、右上のラジオボタンをクリックしてフルインストールを選択することをお勧めします。次に、`Next`を押してセットアップを開始します。
-Since CUDA will be used on the host for training DNNs, it's recommended to select the Full install by click on the radio button in the top right.  Then press `Next` to begin setup.  JetPack will download and then install the sequence of packages.  Note that all the .deb packages are stored under the `jetpack_downloads` subdirectory if you are to need them later.  
+CUDAはDNNのトレーニングにホストで使用されるため、右上のラジオボタンをクリックしてフルインストールを選択することをお勧めします。次に、`Next`を押してセットアップを開始します。JetPackは一連のパッケージをダウンロードしてインストールします。後で必要となった場合でも、すべての.debパッケージが `jetpack_downloads`サブディレクトリの下に格納されています。
 
-After the downloads have finished installing, JetPack will enter the post-install phase where the JetPack is flashed with the L4T BSP.  You'll need to connect your Jetson to your host PC via the micro-USB port and cable included in the devkit.  Then enter your Jetson into recovery mode by holding down the Recovery button while pressing and releasing Reset.  If you type `lsusb` from the host PC after you've connected the micro-USB cable and entered the Jetson into recovery mode, you should see the NVIDIA device come up under the list of USB devices.  JetPack uses the micro-USB connection from the host to flash the L4T BSP to the Jetson.  
+ダウンロードが完了したら、JetPackをホストPCからJetsonへインストールする段階に入ります。Jetsonは、devkitに含まれているマイクロUSBポートとケーブルを介してホストPCに接続してください。その後、リカバリー・ボタンを押しながらリセットを押して、Jetsonをリカバリー・モードに入れます。マイクロUSBケーブルを接続してJetsonをリカバリモードにした後にホストPCから `lsusb`と入力すると、NVIDIAデバイスがUSBデバイスのリストの下に表示されます。JetPackは、ホストからのマイクロUSB接続を使用してL4T BSPをJetsonにフラッシュします。
 
-After flashing, the Jetson will reboot and if attached to an HDMI display, will boot up to the Ubuntu desktop.  After this, JetPack connects to the Jetson from the host via SSH to install additional packages to the Jetson, like the ARM aarch64 builds of CUDA Toolkit, cuDNN, and TensorRT.  For JetPack to be able to reach the Jetson via SSH, the host PC should be networked to the Jetson via Ethernet.  This can be accomplished by running an Ethernet cable directly from the host to the Jetson, or by connecting both devices to a router or switch — the JetPack GUI will ask you to confirm which networking scenario is being used.  See the JetPack **[Install Guide](http://docs.nvidia.com/jetpack-l4t/index.html#developertools/mobile/jetpack/l4t/3.0/jetpack_l4t_install.htm)** for the full directions for installing JetPack and flashing Jetson.
+フラッシュ後、Jetsonを再起動し、HDMIディスプレイに接続されていれば、Ubuntuデスクトップが起動します。その後、JetPackはSSH経由でホストからJetsonに接続し、CUDAツールキット、cuDNN、TensorRTのARM aarch64ビルドのように、Jetsonに追加パッケージをインストールします。JetPackがSSH経由でJetsonに接続できるようにするには、ホストPCをイーサネット経由でJetsonにネットワーク接続する必要があります。これは、イーサネットケーブルをホストからJetsonに直接実行するか、または両方のデバイスをルータまたはスイッチに接続することで実現できます。JetPack GUIにて、どのネットワーク接続方法が使用するかを選択する事が可能です。
 
 ### Installing NVIDIA Driver on the Host
+
 
 At this point, JetPack will have flashed the Jetson with the latest L4T BSP, and installed CUDA toolkits to both the Jetson and host PC.  However, the NVIDIA PCIe driver will still need to be installed on the host PC to enable GPU-accelerated training.  Run the following commands from the host PC to install the NVIDIA driver from the Ubuntu repo:
 
