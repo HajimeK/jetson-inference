@@ -176,7 +176,7 @@ NVcaffeはNVIDAのGPUに最適化されたCaffeのブランチです。NVcaffe�
 
 > **note**: このチュートリアルでは、NVcaffeはトレーニング用途としてホストPC上のみで必要です。推論では、TetsorRTをJetsonで使用するため、caffeは必要ありません。
 
-First some prequisite packages for Caffe are installed, including the Python bindings required by DIGITS:
+DIGITSで必要とされるPythonを含むCaffeに必要なパッケージがインストールされています。
 
 ``` bash
 $ sudo apt-get install --no-install-recommends build-essential cmake git gfortran libatlas-base-dev libboost-filesystem-dev libboost-python-dev libboost-system-dev libboost-thread-dev libgflags-dev libgoogle-glog-dev libhdf5-serial-dev libleveldb-dev liblmdb-dev libprotobuf-dev libsnappy-dev protobuf-compiler python-all-dev python-dev python-h5py python-matplotlib python-numpy python-opencv python-pil python-pip python-protobuf python-scipy python-skimage python-sklearn python-setuptools 
@@ -191,21 +191,20 @@ $ make --jobs=4
 $ make pycaffe
 ```
 
-Caffe should now be configured and built.  Now edit your user's ~/.bashrc to include the path to your Caffe tree (replace the paths below to reflect your own):
+Caffeの設定と構築が完了しました。ユーザの〜/ .bashrcを編集して、Caffeツリーへのパスを含めます（以下のパスを自身のパスに編集してください）：
 
 ``` bash
 export CAFFE_ROOT=/home/dusty/workspace/caffe
 export PYTHONPATH=/home/dusty/workspace/caffe/python:$PYTHONPATH
 ```
 
-Close and re-open the terminal for the changes to take effect.
+変更を有効にするには、ターミナルを閉じてから再度開きます。
 
+### ホストPCへDITISTをインストール
 
-### Installing DIGITS on the Host
+**[DIGITS](https://developer.nvidia.com/digits)** は、対話形式でDNNを訓練し、データセットを管理するPythonベースのWebサービスです。DIGITSワークフローでは、ホストPC上で実行されるため、トレーニングフェーズでネットワークモデルを作成できます。訓練されたモデルは、TensorRTを使用してランタイム推論フェーズのためにホストPCからJetsonにコピーされます。
 
-NVIDIA **[DIGITS](https://developer.nvidia.com/digits)** is a Python-based web service which interactively trains DNNs and manages datasets.  As highlighed in the DIGITS workflow, it runs on the host PC to create the network model during the training phase.  The trained model is then copied from the host PC to the Jetson for the runtime inference phase with TensorRT.
-
-To install DIGITS, first install the prerequisiste packages, then clone the DIGITS repo from GitHub:
+DIGITSをインストールするには、まず必要なパッケージをインストールし、GitHubからDIGITSリポジトリをクローンします。
 
 ``` bash
 $ sudo apt-get install --no-install-recommends graphviz python-dev python-flask python-flaskext.wtf python-gevent python-h5py python-numpy python-pil python-pip python-protobuf python-scipy python-tk
@@ -214,9 +213,9 @@ $ cd DIGITS
 $ sudo pip install -r requirements.txt
 ```
 
-#### Starting the DIGITS Server
+#### DIGITS Serverの起動　
 
-Assuming that your terminal is still in the DIGITS directory, the webserver can be started by running the `digits-devserver` Python script:
+ターミナルがDITIGSのディレクトリにあれば、`digits-devserver` Pythonスクリプトを実行しウェブサーバーを起動します。
 
 ``` bash
 $ ./digits-devserver 
@@ -228,12 +227,10 @@ $ ./digits-devserver
 2017-04-17 13:19:02 [INFO ] Loaded 0 jobs.
 ```
 
-DIGITS will store user jobs (training datasets and model snapshots) under the `digits/jobs` directory.
+DIGITSは `digits / jobs`ディレクトリの下にユーザジョブ（トレーニングデータセットとモデルスナップショット）を保存します。
+インタラクティブなDIGITSセッションにアクセスするには、Webブラウザを開き、 `0.0.0.0：5000`にナビゲートしてください。
 
-To access the interactive DIGITS session, open your web browser and navigate to `0.0.0.0:5000`.
-
-> **note**:  by default the DIGITS server will start on port 5000, but the port can be specified by passing the `--port` argument to the `digits-devserver` script.
-
+> **note**:　デフォルトではDIGITSサーバはポート5000から起動しますが、ポートは `--port`引数を` digits-devserver`スクリプトに渡すことで指定できます。
 
 ## Building from Source on Jetson
 Provided along with this repo are TensorRT-enabled deep learning primitives for running Googlenet/Alexnet on live camera feed for image recognition, pedestrian detection networks with localization capabilities (i.e. that provide bounding boxes), and segmentation.  This repo is intended to be built & run on the Jetson and to accept the network models from the host PC trained on the DIGITS server.
