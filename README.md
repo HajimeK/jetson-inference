@@ -297,7 +297,7 @@ $ make
 
 #### Digging Into the Code
 
-For reference, see the available vision primitives, including [`imageNet`](imageNet.h) for image recognition and [`detectNet`](detectNet.h) for object localization.
+参考として画像認識の為の[`imageNet`](imageNet.h)、オブジェクト検出のための[`detectNet`](detectNet.h) など既に用意されているプリミティブを参照してください。
 
 ``` c++
 /**
@@ -345,8 +345,12 @@ public:
 
 Both inherit from the shared [`tensorNet`](tensorNet.h) object which contains common TensorRT code.
 
-## Classifying Images with ImageNet
-There are multiple types of deep learning networks available, including recognition, detection/localization, and soon segmentation.  The first deep learning capability we're highlighting in this tutorial is **image recognition** using an 'imageNet' that's been trained to identify similar objects.
+## ImageNetによる画像認識
+
+認識、検出、ローカライズやセグメンテーションにすでに利用可能なDeep Learnigのネットワークは複数存在します。
+このチュートリアルで強調している最初のDeep Learningは、類似のオブジェクトを識別するために訓練された「imageNet」を使用した**画像認識**です。
+
+[`imageNet`]（imageNet.h）オブジェクトは入力画像を受け取り、各クラスの確率を出力します。 **[1000 objects](data/networks/ilsvrc12_synset_words.txt)**　のImageNetのデータベースで学習されていれば、標準のAlexNetとGoogleNetネットワークは上記の[ステップ2]（＃configuration-with-cmake）の間にダウンロードされます。[`imageNet`]（imageNet.h）を使用する際、[` imagenet-console`]（imagenet-console / imagenet-console.cpp）というコマンドラインインタフェースと、 ` imagenet-camera`]（imagenet-camera / imagenet-camera.cpp）というライブカメラプログラムを提供しています。
 
 The [`imageNet`](imageNet.h) object accepts an input image and outputs the probability for each class.  Having been trained on ImageNet database of **[1000 objects](data/networks/ilsvrc12_synset_words.txt)**, the standard AlexNet and GoogleNet networks are downloaded during [step 2](#configuring-with-cmake) from above.  As examples of using [`imageNet`](imageNet.h) we provide a command-line interface called [`imagenet-console`](imagenet-console/imagenet-console.cpp) and a live camera program called [`imagenet-camera`](imagenet-camera/imagenet-camera.cpp).
 
