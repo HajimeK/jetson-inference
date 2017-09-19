@@ -123,17 +123,15 @@ CUDAはDNNのトレーニングにホストで使用されるため、右上の�
 
 フラッシュ後、Jetsonを再起動し、HDMIディスプレイに接続されていれば、Ubuntuデスクトップが起動します。その後、JetPackはSSH経由でホストからJetsonに接続し、CUDAツールキット、cuDNN、TensorRTのARM aarch64ビルドのように、Jetsonに追加パッケージをインストールします。JetPackがSSH経由でJetsonに接続できるようにするには、ホストPCをイーサネット経由でJetsonにネットワーク接続する必要があります。これは、イーサネットケーブルをホストからJetsonに直接実行するか、または両方のデバイスをルータまたはスイッチに接続することで実現できます。JetPack GUIにて、どのネットワーク接続方法が使用するかを選択する事が可能です。
 
-### Installing NVIDIA Driver on the Host
+### ホストPCへNVIDIA PCIe Driverをインストール
 
-
-At this point, JetPack will have flashed the Jetson with the latest L4T BSP, and installed CUDA toolkits to both the Jetson and host PC.  However, the NVIDIA PCIe driver will still need to be installed on the host PC to enable GPU-accelerated training.  Run the following commands from the host PC to install the NVIDIA driver from the Ubuntu repo:
+ここまでの作業で、JetPackはJetsonを最新のL4T BSPでフラッシュし、JetsonとホストPCの両方にCUDAツールキットをインストールしています。ただし、NVIDIA PCIeドライバは、GPUアクセラレーションによるトレーニングを可能にするためにホストPCにインストールする必要があります。ホストPCから以下のコマンドを実行して、NVIDIAドライバをインストールします
 
 ``` bash
 $ sudo apt-get install nvidia-375
 $ sudo reboot
 ```
-
-Afer rebooting, the NVIDIA driver should be listed under `lsmod`:
+再起動後、NVIDIAドライバは `lsmod`の下に表示されます：
 
 ``` bash
 $ lsmod | grep nvidia
@@ -145,7 +143,7 @@ drm_kms_helper        167936  1 nvidia_drm
 drm                   368640  4 nvidia_drm,drm_kms_helper
 ```
 
-To verify the CUDA toolkit and NVIDIA driver are working, run some tests that come with the CUDA samples:
+CUDAツールキットとNVIDIAドライバが動作していることを確認するには、CUDAサンプルに付属のテストを実行します。
 
 ``` bash
 $ cd /usr/local/cuda/samples
@@ -155,27 +153,28 @@ $ ./deviceQuery
 $ ./bandwidthTest --memory=pinned
 ```
 
-### Installing cuDNN on the Host
+### ホストPCへcuDNNをインストール
 
-The next step is to install NVIDIA **[cuDNN](https://developer.nvidia.com/cudnn)** libraries on the host PC.  Download the libcudnn and libcudnn packages from the NVIDIA site:
+次のステップは、NVIDIA ** [cuDNN]（https://developer.nvidia.com/cudnn）** ライブラリをホストPCにインストールすることです。
+NVIDIAのサイトからlibcudnnパッケージとlibcudnnパッケージをダウンロードしてください。
 
 ```
 https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v6/prod/8.0_20170307/Ubuntu16_04_x64/libcudnn6_6.0.20-1+cuda8.0_amd64-deb
 https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v6/prod/8.0_20170307/Ubuntu16_04_x64/libcudnn6-dev_6.0.20-1+cuda8.0_amd64-deb
 ```
 
-Then install the packages with the following commands:
+次に、以下のコマンドでパッケージをインストールします。
 
 ``` bash
 $ sudo dpkg -i libcudnn6_6.0.20-1+cuda8.0_amd64.deb
 $ sudo dpkg -i libcudnn6-dev_6.0.20-1+cuda8.0_amd64.deb
 ```
 
-### Installing NVcaffe on the Host
+### ホストPCへ NVcaffeをインストール
 
-NVcaffe is the NVIDIA branch of Caffe with optimizations for GPU.  NVcaffe uses cuDNN and is used by DIGITS for training DNNs.  To install it, clone the NVcaffe repo from GitHub and compile from source.  Use the NVcaffe-0.15 branch like below.
+NVcaffeはNVIDAのGPUに最適化されたCaffeのブランチです。NVcaffeはcuDNNを使用し、DNNのトレーニングのためDIGITSの中で使用されます。それをインストールするには、GitHubからNVcaffeレポをクローンし、ソースからコンパイルします。以下のようなNVcaffe-0.15ブランチを使用してください。
 
-> **note**: for this tutorial, NVcaffe is only required on the host (for training).  During inferencing phase TensorRT is used on the Jetson and doesn't require caffe.
+> **note**: このチュートリアルでは、NVcaffeはトレーニング用途としてホストPC上のみで必要です。推論では、TetsorRTをJetsonで使用するため、caffeは必要ありません。
 
 First some prequisite packages for Caffe are installed, including the Python bindings required by DIGITS:
 
