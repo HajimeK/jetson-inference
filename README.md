@@ -352,19 +352,16 @@ Both inherit from the shared [`tensorNet`](tensorNet.h) object which contains co
 
 [`imageNet`]（imageNet.h）オブジェクトは入力画像を受け取り、各クラスの確率を出力します。 **[1000 objects](data/networks/ilsvrc12_synset_words.txt)**　のImageNetのデータベースで学習されていれば、標準のAlexNetとGoogleNetネットワークは上記の[ステップ2]（＃configuration-with-cmake）の間にダウンロードされます。[`imageNet`]（imageNet.h）を使用する際、[` imagenet-console`]（imagenet-console / imagenet-console.cpp）というコマンドラインインタフェースと、 ` imagenet-camera`]（imagenet-camera / imagenet-camera.cpp）というライブカメラプログラムを提供しています。
 
-The [`imageNet`](imageNet.h) object accepts an input image and outputs the probability for each class.  Having been trained on ImageNet database of **[1000 objects](data/networks/ilsvrc12_synset_words.txt)**, the standard AlexNet and GoogleNet networks are downloaded during [step 2](#configuring-with-cmake) from above.  As examples of using [`imageNet`](imageNet.h) we provide a command-line interface called [`imagenet-console`](imagenet-console/imagenet-console.cpp) and a live camera program called [`imagenet-camera`](imagenet-camera/imagenet-camera.cpp).
-
 ### Using the Console Program on Jetson
 
-First, try using the [`imagenet-console`](imagenet-console/imagenet-console.cpp) program to test imageNet recognition on some example images.  It loads an image, uses TensorRT and the [`imageNet`](imageNet.h) class to perform the inference, then overlays the classification and saves the output image.
+まず、[`imagenet-console`]（imagenet-console / imagenet-console.cpp）プログラムを使用して、いくつかの例でimageNet認識をテストしてみてください。 画像をロードし、TensorRTと[`imageNet`]（imageNet.h）クラスを使用して推論を行い、分類をオーバーレイして出力画像を保存します。
 
-After [building](#building-from-source-on-jetson), make sure your terminal is located in the aarch64/bin directory:
+ビルド後、terminalがaarch64 / binディレクトリにあることを確認してください：
 
 ``` bash
 $ cd jetson-inference/build/aarch64/bin
 ```
-
-Then, classify an example image with the [`imagenet-console`](imagenet-console/imagenet-console.cpp) program.  [`imagenet-console`](imagenet-console/imagenet-console.cpp) accepts 2 command-line arguments:  the path to the input image and path to the output image (with the class overlay printed).
+次に、[`imagenet-console`]（imagenet-console / imagenet-console.cpp）プログラムでサンプル画像を分類します。[`imagenet-console`]（imagenet-console / imagenet-console.cpp）は、入力イメージへのパスと出力イメージへのパス（クラスオーバーレイが印刷されたもの）の2つのコマンドライン引数を受け入れます。
 
 ``` bash
 $ ./imagenet-console orange_0.jpg output_0.jpg
@@ -377,20 +374,19 @@ $ ./imagenet-console granny_smith_1.jpg output_1.jpg
 ```
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/imagenet-apple.jpg" width="500">
 
-Next, we will use [imageNet](imageNet.h) to classify a live video feed from the Jetson onboard camera.
+次に、[imageNet]（imageNet.h）を使用して、Jetson搭載カメラからのライブビデオ入力を分類します。
 
 ### Running the Live Camera Recognition Demo
 
-Similar to the last example, the realtime image recognition demo is located in /aarch64/bin and is called [`imagenet-camera`](imagenet-camera/imagenet-camera.cpp).
-It runs on live camera stream and depending on user arguments, loads googlenet or alexnet with TensorRT. 
+最後の例と同様に、リアルタイム画像認識デモは/ aarch64 / binにあり、[`imagenet-camera`]（imagenet-camera / imagenet-camera.cpp）と呼ばれています。ライブカメラストリームで動作し、ユーザの引数に応じて、googlenetまたはalexnetにTensorRTをロードします。
+
 ``` bash
 $ ./imagenet-camera googlenet           # to run using googlenet
 $ ./imagenet-camera alexnet             # to run using alexnet
 ```
+1秒あたりのフレーム数（FPS）、ビデオからの分類されたオブジェクト名、および分類されたオブジェクトの信頼度は、OpenGLウィンドウタイトルバーに出力されます。GooglenetとAlexnetは1000クラスのオブジェクトを含むILSVRC12 ImageNetデータベースで訓練されているため、アプリケーションはデフォルトで1000種類までのオブジェクトを認識できます。1000種類のオブジェクトの名前のマッピングは、[data / networks / ilsvrc12_synset_words.txt](http://github.com/dusty-nv/jetson-inference/blob/master/data/networks/ilsvrc12_synset_words.txt)にあるリポジトリに含まれています
 
-The frames per second (FPS), classified object name from the video, and confidence of the classified object are printed to the openGL window title bar.  By default the application can recognize up to 1000 different types of objects, since Googlenet and Alexnet are trained on the ILSVRC12 ImageNet database which contains 1000 classes of objects.  The mapping of names for the 1000 types of objects, you can find included in the repo under [data/networks/ilsvrc12_synset_words.txt](http://github.com/dusty-nv/jetson-inference/blob/master/data/networks/ilsvrc12_synset_words.txt)
-
-> **note**:  by default, the Jetson's onboard CSI camera will be used as the video source.  If you wish to use a USB webcam instead, change the `DEFAULT_CAMERA` define at the top of [`imagenet-camera.cpp`](imagenet-camera/imagenet-camera.cpp) to reflect the /dev/video V4L2 device of your USB camera.  The model it's tested with is Logitech C920. 
+> **note**:  デフォルトでは、JetsonのオンボードCSIカメラがビデオソースとして使用されます。オンボードカメラの代わりにUSBウェブカメラを使用する場合は、/ dev / video V4L2デバイスを反映するために、[`imagenet-camera.cpp`]（imagenet-camera / imagenet-camera.cpp）の上部にある `DEFAULT_CAMERA`定義を変更してください。ここで使用したモデルはLogitech C920です。
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/imagenet-orange-camera.jpg" width="800">
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/imagenet-apple-camera.jpg" width="800">
