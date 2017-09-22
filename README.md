@@ -393,17 +393,17 @@ $ ./imagenet-camera alexnet             # to run using alexnet
 
 ### Re-training the Network with DIGITS
 
-The existing GoogleNet and AlexNet models that are downloaded by the repo are pre-trained on [1000 classes of objects](data/networks/ilsvrc12_synset_words.txt) from the ImageNet ILSVRC12 benchmark.
+上記まででダウロードされた既存のGoogleNetとAlexNetのモデルは、ImageNet ILSVRC12ベンチマークの[1000クラスのオブジェクト]（data / networks / ilsvrc12_synset_words.txt）を使って事前にトレーニングされています。
 
-To recognize a new object class, you can use DIGITS to re-train the network on new data.  You can also organize the existing classes differently, including group multiple subclasses into one.  For example in this tutorial we'll take 230 of the 1000 classes, group those into 12 classes and retrain the network.
+新しいオブジェクトクラスを認識するために、DIGITSを使用して、新しいデータでネットワークを追加トレーニングすることができます。複数のサブクラスを1つにグループ化するなど、既存のクラスを別々に編成することもできます。たとえば、このチュートリアルでは、1000クラスのうちの230クラスを使用し、それらを12クラスにグループ化し、ネットワークを再テストします。
 
-Let's start by downloading the ILSVRC12 images to work with, or you can substitute your own dataset in an **[Image Folder](https://github.com/NVIDIA/DIGITS/blob/master/docs/ImageFolderFormat.md)**.
+まず、ILSVRC12イメージをダウンロードして作業を開始するか、** [Image Folder]（https://github.com/NVIDIA/DIGITS/blob/master/docs/ImageFolderFormat.md）** で自分のデータセットを置き換えて開始しましょう。
 
 ### Downloading Image Recognition Dataset
 
-An image recognition dataset consists of a large number of images sorted by their classification type (typically by directory).  The ILSVRC12 dataset was used in the training of the default GoogleNet and AlexNet models.  It's roughly 100GB in size and includes 1 million images over 1000 different classes.  The dataset is downloaded to the DIGITS server using the [`imagenet-download.py`](tools/imagenet-download.py) image crawler.
+画像認識データセットは、分類タイプ（通常はディレクトリ別）でソートされた多数の画像で構成されています。ILSVRC12データセットは、デフォルトのGoogleNetおよびAlexNetモデルのトレーニングに使用されました。サイズは約100GBで、1000種類以上の画像が100万枚含まれています。データセットは、[`imagenet-download.py`]（tools / imagenet-download.py）イメージクローラを使用してDIGITSサーバにダウンロードされます。
 
-To download the dataset, first make sure you have enough disk space on your DIGITS server (120GB recommended), then run the following commands from a directory on that machine where you want the dataset stored:
+データセットをダウンロードするには、まず、DIGITSサーバーに十分なディスク容量（120GB推奨）があることを確認し、データセットが保存されるそのマシンのディレクトリから次のコマンドを実行します。
 
 ``` bash
 $ wget --no-check-certificate https://nvidia.box.com/shared/static/gzr5iewf5aouhc5exhp3higw6lzhcysj.gz -O ilsvrc12_urls.tar.gz
@@ -412,13 +412,13 @@ $ wget https://rawgit.com/dusty-nv/jetson-inference/master/tools/imagenet-downlo
 $ python imagenet-download.py ilsvrc12_urls.txt . --jobs 100 --retry 3 --sleep 0
 ```
 
-In the commands above the list of image URLs along with the scripts are downloaded before launching the crawler.
+上記のコマンドでは、スクリプトとともに画像URLのリストがダウンロードされてから、クローラ（Crawler)を起動します。
 
-> **note**: be considerate running the image crawler from a corporate network, IT may flag the activity.
-> It will probably take overnight on a decent connection to download the 1000 ILSVRC12 classes (100GB).
-
-The crawler will download images to subdirectories that correspond to it's classification.  Each image class is stored in it's own directory, with 1000 directories in total (one for each class in ILSVRC12).  The folders are organized with a naming scheme similar to:
-
+> **note**: データ量が多いのでしっかりとしたネットワークにつないで実行することをお勧めします。
+> 1000 ILSVRC12クラス（100GB）をダウンロードするには、まともな接続でも一定の時間が掛かります。
+　　　　　　
+クローラは、分類に対応するサブディレクトリにイメージをダウンロードします。各イメージ・クラスは、それ自身のディレクトリに格納され、合計で1000個のディレクトリがあります（ILSVRC12の各クラスに1つ）。フォルダは、次のような命名体系で編成されています。
+      
 ```
 n01440764/
 n01443537/
@@ -427,6 +427,8 @@ n01491361/
 n01494475/
 ...
 ```
+上記のn+8つの数字列はクラスの **synset ID**　となります。クラスの名前文字列は、[`ilsvrc12_synset_words.txt`]（data / networks / ilsvrc12_synset_words.txt）で参照できます。たとえば、synset `n01484850 great white shark`などです。
+
 
 These 8-digit ID's prefixed wth N are referred to as the **synset ID** of the class.  The name string of the class can be looked up in [`ilsvrc12_synset_words.txt`](data/networks/ilsvrc12_synset_words.txt).  For example, synset `n01484850 great white shark`.
 
