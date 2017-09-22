@@ -232,7 +232,7 @@ DIGITSは `digits / jobs`ディレクトリの下にユーザジョブ（トレ�
 
 > **note**:　デフォルトではDIGITSサーバはポート5000から起動しますが、ポートは `--port`引数を` digits-devserver`スクリプトに渡すことで指定できます。
 
-## Jetson上でソースからのビルド
+## Building from Source on Jetson
 
 このレポートでは、画像認識のためのライブカメラフィード、ローカライゼーション能力を有する歩行者検出ネットワーク（すなわち、境界ボックスの提供）、およびセグメンテーションのためにGooglenet / Alexnetを実行するためのTensorRT対応ディープ学習プリミティブが提供される。 このレポートは、Jetson上に構築されて実行され、DIGITSサーバーでトレーニングされたホストPCからネットワークモデルを受け入れることを目的としています。
 
@@ -345,7 +345,7 @@ public:
 
 Both inherit from the shared [`tensorNet`](tensorNet.h) object which contains common TensorRT code.
 
-## ImageNetによる画像認識
+## Classifying Images with ImageNet 
 
 認識、検出、ローカライズやセグメンテーションにすでに利用可能なDeep Learnigのネットワークは複数存在します。
 このチュートリアルで強調している最初のDeep Learningは、類似のオブジェクトを識別するために訓練された「imageNet」を使用した**画像認識**です。
