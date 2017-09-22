@@ -488,11 +488,11 @@ $ ./imagenet-subset.sh /opt/datasets/imagenet/ilsvrc12 12_classes
 
 ### Creating Image Classification Model with DIGITS
 
-When the previous data import job is complete, return to the DIGITS home screen.  Select the `Models` tab and choose to create a new `Classification Model` from the drop-down:
+データインポートジョブが完了したら、DIGITSのホーム画面に戻ります。`Models`タブを選択し、ドロップダウンから新しいClassification Modelを作成することを選択します：
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/imagenet-digits-new-model-menu.png" width="250">
 
-Make the following settings in the form:
+フォームに以下の設定を行います。
 
 * Select Dataset:  `ImageNet-ILSVRC12-subset`
 * Subtract Mean:  `Pixel`
@@ -500,25 +500,25 @@ Make the following settings in the form:
 * Group Name:  `ImageNet`
 * Model Name:  `GoogleNet-ILSVRC12-subset`
 
-After selecting a GPU to train on, click the `Create` button at the bottom to begin training.
+トレーニングするGPUを選択したら、下部にある `Create`ボタンをクリックしてトレーニングを開始します。
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/imagenet-digits-new-model.png)
 
 ### Testing Classification Model in DIGITS
 
-After the training job completes 30 epochs, the trained model should appear like so:
+学習が30エポックを完了した後、訓練されたモデルは次のように表示されます：
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/imagenet-digits-model.png)
 
-At this point, we can try testing our new model's inference on some example images in DIGITS.  On the same page as the plot above, scroll down under the `Trained Models` section.  Under `Test a Single Image`, select an image to try (for example, `/ilsvrc12/n02127052/n02127052_1203.jpg`):
+この時点で、DIGITSのいくつかのサンプル画像について新しいモデルの推論をテストすることができます。上記のプロットと同じページで、`Trained Models`セクションの下にスクロールします。`Test a Single Image`で、試してみたい画像を選択してください（例えば` / ilsvrc12 / n02127052 / n02127052_1203.jpg`）：
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/imagenet-digits-test-single-image.png" width="350">
 
-Press the `Classify One` button and you should see a page similar to:
+`Classify One`　ボタンを押すと、次のようなページが表示されます。
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/imagenet-digits-infer-cat.png)
 
-The image is classified as the new GoogleNet-12 model as `cat`, while in the original GoogleNet-1000 it was under `Lynx`.  This indicates the new model is working ok, because the Lynx category was included in GoogleNet-12's training of cat.
+画像は新しいGoogleNet-12モデルとして'cat'と分類され、元のGoogleNet-1000では'Lynx'に分類されています。これは、LynxカテゴリがGoogleNet-12のcatのトレーニングに含まれていたため、新しいモデルが正常に機能していることを示しています。
 
 ### Downloading Model Snapshot to Jetson
 
