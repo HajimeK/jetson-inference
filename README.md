@@ -472,11 +472,11 @@ $ ./imagenet-subset.sh /opt/datasets/imagenet/ilsvrc12 12_classes
 
 ### Importing Classification Dataset into DIGITS
 
-Navigate your browser to your DIGITS server instance and choose to create a new `Classification Dataset` from the drop-down under the Datasets tab:
+ブラウザをDIGITSサーバーインスタンスに移動し、'データセット'タブのドロップダウンから新しい分類データセットを作成することを選択します。
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/imagenet-digits-new-dataset-menu.png" width="250">
 
-Set the `Training Images` path to the `12_classes` folder from the previous step and make the following
+`Training Images`パスを前のステップの` 12_classes`フォルダに設定し、次のようにします。
 
 * % for validation:  `10`
 * Group Name:  `ImageNet`
@@ -484,7 +484,7 @@ Set the `Training Images` path to the `12_classes` folder from the previous step
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/imagenet-digits-new-dataset.png)
 
-Use the `Create` button at the bottom of the page to launch the dataset import job.  The size of the data subset is around 20GB, so depending on server I/O performance it takes 10-15 minutes.  Next we'll create the new model and begin training it.
+ページ下部の'Create'ボタンをおして、データセットインポートジョブを起動します。データサブセットのサイズは約20GBなので、サーバーのI / Oパフォーマンスに応じて10〜15分かかります。次に、新しいモデルを作成してトレーニングを開始します。
 
 ### Creating Image Classification Model with DIGITS
 
