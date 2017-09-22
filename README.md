@@ -591,13 +591,14 @@ dog 0 0 0 528.63 315.22 569.09 354.18 0 0 0 0 0 0 0
 sheep 0 0 0 235.28 300.59 270.52 346.55 0 0 0 0 0 0 0
 ```
 
-[Read more](https://github.com/NVIDIA/DIGITS/blob/digits-4.0/digits/extensions/data/objectDetection/README.md) about the folder structure and KITTI label format that DIGITS uses.  
+[DIGITS]が使用するフォルダ構造とKITTIラベルのフォーマットについては、下記を参照してください。
+[Read more](https://github.com/NVIDIA/DIGITS/blob/digits-4.0/digits/extensions/data/objectDetection/README.md) 
 
 ### Downloading the Detection Dataset
 
-Let's explore using the [MS-COCO](http://mscoco.org/) dataset to train and deploy networks that detect the locations of everyday objects in camera feeds.  See the [`coco2kitti.py`](tools/coco2kitti.py) script for converting MS-COCO object classes to KITTI format.  Once in DIGITS folder structure, they can be imported as datasets into DIGITS.  Some example classes from MS-COCO already preprocessed in DIGITS/KITTI format are provided for convienience.
+ [MS-COCO](http://mscoco.org/) データセットを使用して、カメラのフィード内の日常的なオブジェクトの場所を検出するネットワークをトレーニングし、展開する方法を紹介します。MS-COCOオブジェクトクラスをKITTI形式に変換するには、[`coco2kitti.py`]（tools / coco2kitti.py）スクリプトを参照してください。DIGITSフォルダ構造に入ると、データセットとしてDIGITSにインポートできます。DIGITS / KITTIフォーマットで事前に処理されたMS-COCOのいくつかのクラスの例は、便宜上提供されています。
 
-From a terminal on your DIGITS server download and extract **[sample MS-COCO classes](https://nvidia.box.com/shared/static/tdrvaw3fd2cwst2zu2jsi0u43vzk8ecu.gz)** already in DIGITS/KITTI format here:
+あなたのDIGITSサーバ上の端末から** DIGITS / KITTI形式の**[sample MS-COCO classes](https://nvidia.box.com/shared/static/tdrvaw3fd2cwst2zu2jsi0u43vzk8ecu.gz)** ダウンロードして抽出してください：
 
 ```bash
 $ wget --no-check-certificate https://nvidia.box.com/shared/static/tdrvaw3fd2cwst2zu2jsi0u43vzk8ecu.gz -O coco.tar.gz
@@ -613,15 +614,15 @@ coco 100%[======================================>]   4.5G  3.33MB/s    in 28m 22
 $ tar -xzvf coco.tar.gz 
 ```
 
-Included is the training data in DIGITS format for the airplane, bottle, chair, and dog classes.  [`coco2kitti.py`](tools/coco2kitti.py) can be used to convert other classes.
+飛行機、ボトル、椅子、犬のクラスのDIGITS形式のトレーニングデータが含まれています。[`coco2kitti.py`]（tools / coco2kitti.py）は他のクラスを変換するのに使うことができます。
 
 ### Importing the Detection Dataset into DIGITS
 
-Navigate your browser to your DIGITS server instance and choose to create a new `Detection Dataset` from the drop-down in the Datasets tab:
+ブラウザをDIGITSサーバーインスタンスに移動し、`Datasets`タブのドロップダウンから新しい`Detection Dataset`を作成することを選択します。
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/detectnet-digits-new-dataset-menu.png" width="250">
 
-In the form fields, specify the following options and paths to the image and label folders under the location where you extracted the aerial dataset:
+フォームフィールドで、Aerial dataset を抽出した場所の下にある画像フォルダとラベルフォルダへの次のオプションとパスを指定します。
 
 * Training image folder:  `coco/train/images/dog`
 * Training label folder:  `coco/train/labels/dog`
@@ -634,15 +635,15 @@ In the form fields, specify the following options and paths to the image and lab
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/detectnet-digits-new-dataset-dog.png)
 
-Name the dataset whatever you choose and click the `Create` button at the bottom of the page to launch the importing job.  Next we'll create the new detection model and begin training it.
+選択したデータセットに名前を付け、ページの下部にある`Create`ボタンをクリックして、インポートを開始します。次に、新しい検出モデルを作成し、それを学習させます。
 
 ### Creating DetectNet Model with DIGITS
 
-When the previous data import job is complete, return to the DIGITS home screen.  Select the `Models` tab and choose to create a new `Detection Model` from the drop-down:
+データインポートが完了したら、DIGITSのホーム画面に戻ります。`Models`タブを選択し、ドロップダウンから新しい`Detection Model` を作成することを選択します。
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/detectnet-digits-new-model-menu.png" width="250">
 
-Make the following settings in the form:
+フォームに次の設定を行います。
 
 * Select Dataset:  `coco-dog`
 * Training epochs:  `100`
@@ -655,7 +656,8 @@ Make the following settings in the form:
 
 #### Selecting DetectNet Batch Size
 
-DetectNet's network default batch size of 10 consumes up to 12GB GPU memory during training.  However by using the `Batch Accumulation` field, you can also train DetectNet on a GPU with less than 12GB memory.  See the table below depending on the amount of GPU memory available in your DIGITS server:
+DetectNetのネットワークのデフォルトバッチサイズ10は、学習中に最大12GBのGPUメモリを消費します。ただし、「Batch Accumulation」フィールドを使用することで、12 GB未満のメモリを搭載したGPUでDetectNetをトレーニングすることもできます。DIGITSサーバーで使用可能なGPUメモリの量に応じて、以下の表を参照してください。
+
 
 | GPU Memory     | Batch Size                | Batch Accumulation  |
 | -------------- |:-------------------------:|:-------------------:|
@@ -663,59 +665,59 @@ DetectNet's network default batch size of 10 consumes up to 12GB GPU memory duri
 | 8GB            | 5                         | 2                   |
 | 12GB or larger | `[network defaults]` (10) | Leave blank (1)     |
 
-If you're training on a card with 12GB of memory or more, leave the `Batch Size` as the default and leave the `Batch Accumulation` blank.  For GPUs with less memory, use the settings from above.
+12GB以上のメモリを搭載したカードでトレーニングを行っている場合は、デフォルトで`Batch Size` のままにし、 `Batch Accumulation`は空白のままにしておきます。メモリーの少ないGPUの場合は、上記の設定を使用してください。
 
 #### Specifying the DetectNet Prototxt 
 
-In the network area select the `Custom Network` tab and then copy/paste the contents of [`detectnet.prototxt`](data/networks/detectnet.prototxt)
+ネットワーク領域で `Custom Network`タブを選択し、[` detectnet.prototxt`]（data / networks / detectnet.prototxt）の内容をコピー/ペーストしてください。
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/detectnet-digits-custom-network.jpg)
 
-The DetectNet prototxt is located at [`data/networks/detectnet.prototxt`](https://github.com/dusty-nv/jetson-inference/blob/master/data/networks/detectnet.prototxt) in the repo.
+DetectNetのprototxtは、リポジトリの[`data / networks / detectnet.prototxt`]（https://github.com/dusty-nv/jetson-inference/blob/master/data/networks/detectnet.prototxt）にあります。
 
 #### Training the Model with Pretrained Googlenet
 
-Since DetectNet is derived from Googlenet, it is strongly recommended to use pre-trained weights from Googlenet as this will help speed up and stabilize training significantly.  Download the Googlenet model from [here](http://dl.caffe.berkeleyvision.org/bvlc_googlenet.caffemodel) or by running the following command from your DIGITS server:
+DetectNetはGooglenetから派生しているため、Googlenetの学習済みのウェイトを使用することを強く推奨します。これは、トレーニングのスピードアップと安定化に役立ちます。Googlenetモデルは [here](http://dl.caffe.berkeleyvision.org/bvlc_googlenet.caffemodel)　からダウンロードするか、またはDIGITSサーバーから次のコマンドを実行してダウンロードしてください。
 
 ```bash
 wget http://dl.caffe.berkeleyvision.org/bvlc_googlenet.caffemodel
 ```
 
-Then specify the path to your Googlenet under the `Pretrained Model` field.
+次に、 `Pretrained Model`フィールドの下でGooglenetへのパスを指定します。
 
-Select a GPU to train on and set a name and group for the model:
+トレーニングするGPUを選択し、モデルの名前とグループを設定します。
 
 * Group Name `MS-COCO`
 * Model Name `DetectNet-COCO-Dog`
 
-Finally, click the `Create` button at the bottom to begin training.
+最後に、下部にある「作成」ボタンをクリックしてトレーニングを開始します。
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/detectnet-digits-new-model-dog.png)
 
 ### Testing DetectNet Model Inference in DIGITS
 
-Leave the training job to run for a while, say 50 epochs, until the mAP (`Mean Average Precision`) plot begins to increase.  Note that due to the way mAP is calculated by the DetectNet loss function, the scale of mAP isn't necessarily 0-100, and even an mAP between 5 and 10 may indicate the model is functional.  With the size of the example COCO datasets we are using, it should take a couple hours training on a recent GPU before all 100 epochs are complete.
+mAP（`Mean Average Precision`）プロットが増加し始めるまで、だいたい50エポック、学習作業をしばらく実行してください。DetectNetの損失関数によってmAPが計算される方法により、mAPのスケールは必ずしも0〜100ではなく、5〜10のmAPでもモデルが機能的であることが示されることに注意してください。使用しているCOCOデータセットの例では、100個のエポックが完了する前に、最新のGPUで数時間のトレーニングを受ける必要があります。
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/detectnet-digits-model-dog.png)
 
-At this point, we can try testing our new model's inference on some example images in DIGITS.  On the same page as the plot above, scroll down under the `Trained Models` section.  Set the `Visualization Model` to *Bounding Boxes* and under `Test a Single Image`, select an image to try (for example, `/coco/val/images/dog/000074.png`):
+この時点で、DIGITSのいくつかのサンプル画像について新しいモデルの推論をテストすることができます。上記のプロットと同じページで、`Trained Models`セクションの下にスクロールします。　`Visualization Method` に *Bounding Boxes* と `Test a Single Image`の下に試したい画像を選択して設定します（例　/ coco / val / images / dog / 000074.png）。
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/detectnet-digits-visualization-options-dog.png" width="350">
 
-Press the `Test One` button and you should see a page similar to:
+`Test One`ボタンを押すと、次のようなページが表示されます。
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/detectnet-digits-infer-dog.png)
 
 
 ### Downloading the Model Snapshot to Jetson
 
-Next, download and extract the trained model snapshot to Jetson.  From the browser on your Jetson TX1/TX2, navigate to your DIGITS server and the `DetectNet-COCO-Dog` model.  Under the `Trained Models` section, select the desired snapshot from the drop-down (usually the one with the highest epoch) and click the `Download Model` button.
+次に、学習済みのモデルスナップショットをダウンロードしてJetsonに抽出します。あなたのJetson TX1 / TX2のブラウザから、あなたのDIGITSサーバと `DetectNet-COCO-Dog`モデルにナビゲートしてください。`Trained Models`セクションの下で、ドロップダウンから目的のスナップショット（通常は最高エポックのスナップショット）を選択し、` Download Model`ボタンをクリックします。
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/detectnet-digits-model-download-dog.png" width="650">
 
-Alternatively, if your Jetson and DIGITS server aren't accessible from the same network, you can use the step above to download the snapshot to an intermediary machine and then use SCP or USB stick to copy it to Jetson.  
+また、JetsonとDIGITSサーバーが同じネットワークからアクセスできない場合は、上記の手順を使用してスナップショットを仲介マシンにダウンロードし、SCPまたはUSBスティックを使用してJetsonにコピーすることができます。
 
-Then extract the archive with a command similar to:
+次に、下記コマンドでアーカイブを解凍します。
 
 ```cd <directory where you downloaded the snapshot>
 tar -xzvf 20170504-190602-879f_epoch_100.0.tar.gz
@@ -723,9 +725,9 @@ tar -xzvf 20170504-190602-879f_epoch_100.0.tar.gz
 
 ### DetectNet Patches for TensorRT
 
-In the original DetectNet prototxt exists a Python clustering layer which isn't available in TensorRT and should be deleted from the `deploy.prototxt` included in the snapshot.  In this repo the [`detectNet`](detectNet.h) class handles the clustering as opposed to Python.
+オリジナルのDetectNetでは、prototxtにはTensorRTでは利用できないPythonクラスタリング層が存在し、スナップショットに含まれる `deploy.prototxt`から削除する必要があります。このレポでは、[`detectNet`]（detectNet.h）クラスはPythonとは対照的にクラスタリングを処理します。
 
-At the end of `deploy.prototxt`, delete the layer named `cluster`:
+`deploy.prototxt`の最後に` cluster`という名前の層を削除します：
 
 ```
 layer {
@@ -742,13 +744,13 @@ layer {
 }
 ```
 
-Without this Python layer, the snapshot can now be imported into TensorRT.
+このPythonレイヤーを削除して、スナップショットをTensorRTにインポートできるようになりました。
 
 ### Processing Images from the Command Line on Jetson
 
-To process test images with [`detectNet`](detectNet.h) and TensorRT, use the [`detectnet-console`](detectnet-console/detectnet-console.cpp) program.  [`detectnet-console`](detectnet-console/detectnet-console.cpp) accepts command-line arguments representing the path to the input image and path to the output image (with the bounding box overlays rendered).  Some test images are also included with the repo.
+[`detectNet`]（detectNet.h）とTensorRTでテストイメージを処理するには、[` detectnet-console`]（detectnet-console / detectnet-console.cpp）プログラムを使用します。[`detectnet-console`]（detectnet-console / detectnet-console.cpp）は、入力イメージへのパスと出力イメージへのパスを表すコマンドライン引数を受け入れます（バウンディングボックスのオーバーレイをレンダリングします）。いくつかのテスト画像もレポに含まれています。
 
-To specify your model that you downloaded from DIGITS, use the syntax to `detectnet-console` below.  First, for convienience, set the path to your extracted snapshot into a `$NET` variable:
+DIGITSからダウンロードしたモデルを指定するには、下記の `detectnet-console`の構文を使用します。まず、抽出されたスナップショットへのパスを `$ NET`変数に設定します：
 
 ``` bash
 $ NET=20170504-190602-879f_epoch_100
