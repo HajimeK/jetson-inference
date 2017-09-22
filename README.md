@@ -522,23 +522,23 @@ $ ./imagenet-subset.sh /opt/datasets/imagenet/ilsvrc12 12_classes
 
 ### Downloading Model Snapshot to Jetson
 
-Now that we confirmed the trained model is working in DIGITS, let's download and extract the model snapshot to Jetson.  From the browser on your Jetson TX1/TX2, navigate to your DIGITS server and the `GoogleNet-ILSVRC12-subset` model.  Under the `Trained Models` section, select the desired snapshot from the drop-down (usually the one with the highest epoch) and click the `Download Model` button.
+学習済みモデルがDIGITSで動作していることを確認したので、Jetsonにモデルスナップショットをダウンロードして抽出しましょう。Jetson TX1 / TX2のブラウザから、DIGITSサーバーと `GoogleNet-ILSVRC12-subset`モデルに移動します。`Trained Models`セクションの下で、ドロップダウンから目的のスナップショット（通常は最高エポックのスナップショット）を選択し、` Download Model`ボタンをクリックします。
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/imagenet-digits-model-download.png" width="650">
 
-Alternatively, if your Jetson and DIGITS server aren't accessible from the same network, you can use the step above to download the snapshot to an intermediary machine and then use SCP or USB stick to copy it to Jetson.  
+また、JetsonとDIGITSサーバーが同じネットワークからアクセスできない場合は、上記の手順を使用してスナップショットを仲介マシンにダウンロードし、SCPまたはUSBスティックを使用してJetsonにコピーすることができます。
 
-Then extract the archive with a command similar to:
+次に、下記コマンドでアーカイブを解凍します。
 
 ```cd <directory where you downloaded the snapshot>
 tar -xzvf 20170524-140310-8c0b_epoch_30.0.tar.gz
 ```
 
-Next we will load our custom snapshot into TensorRT, running on the Jetson.
+次に、カスタムスナップショットをTetsorRTにロードし、Jetsonで実行します。
 
 ### Loading Custom Models on Jetson
 
-The `imagenet-console` and `imagenet-camera` programs that we used before also accept extended command line parameters for loading a custom model snapshot.  Set the `$NET` variable below to the path to your extracted snapshot:
+これまで使用していた `imagenet-console`と` imagenet-camera`プログラムは、カスタムモデルのスナップショットを読み込むための拡張コマンドラインパラメータを受け入れます。以下の `$ NET`変数を抽出されたスナップショットのパスに設定します：
 
 ``` bash
 $ NET=networks/GoogleNet-ILSVRC12-subset
@@ -551,18 +551,19 @@ $ ./imagenet-console bird_0.jpg output_0.jpg \
 --output_blob=softmax
 ```
 
-As before, the classification and confidence will be overlayed to the output image.  When compared to the output of the original network, the re-trained GoogleNet-12 makes similar classifications to the original GoogleNet-1000:
+前述のように、分類とコンフィデンスは出力画像にオーバーレイされます。元のネットワークの出力と比較すると、再学習されたGoogleNet-12は、元のGoogleNet-1000と同様の分類を行います。
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/imagenet-tensorRT-console-bird.png)
 
-The extended command line parameters above also load custom classification models with [`imagenet-camera`](imagenet-camera/imagenet-camera.cpp). 
+上記の拡張コマンドラインパラメータは、[`imagenet-camera`]（imagenet-camera / imagenet-camera.cpp）を使用してカスタム分類モデルを読み込みます。
 
 ## Locating Object Coordinates using DetectNet
-The previous image recognition examples output class probabilities representing the entire input image.   The second deep learning capability we're highlighting in this tutorial is detecting objects, and finding where in the video those objects are located (i.e. extracting their bounding boxes).  This is performed using a 'detectNet' - or object detection / localization network.
 
-The [`detectNet`](detectNet.h) object accepts as input the 2D image, and outputs a list of coordinates of the detected bounding boxes.  To train the object detection model, first a pretrained ImageNet recognition model (like Googlenet) is used with bounding coordinate labels included in the training dataset in addition to the source imagery.
+上記までの画像認識例は、入力画像全体を表すクラス確率を出力しました。このチュートリアルで紹介している第2のDeep Learningは、オブジェクトの検出と、そのオブジェクトが配置されているビデオの場所の特定（つまり、境界ボックスの抽出）です。これは、 'detectNet'または物体検出/ローカリゼーションネットワークを使用して実行されます。
 
-The following pretrained DetectNet models are included with the tutorial:
+[`detectNet`]（detectNet.h）オブジェクトは2D画像を入力として受け取り、検出されたバウンディングボックスの座標のリストを出力します。物体検出モデルを学習するために、まず、事前に学習されたImageNet認識モデル（Googlenetのような）が、ソース画像に加えて訓練データセットに含まれる境界座標ラベルと共に使用されます。
+
+チュートリアルには、以下の事前に学習されたDetectNetモデルが含まれています。
 
 1. **ped-100**  (single-class pedestrian detector)
 2. **multiped-500**   (multi-class pedestrian + baggage detector)
@@ -572,14 +573,18 @@ The following pretrained DetectNet models are included with the tutorial:
 6. **coco-chair**     (MS COCO chair class)
 7. **coco-dog**       (MS COCO dog class)
 
-As with the previous examples, provided are a console program and a camera streaming program for using detectNet.
-
+前の画像認識の例と同様に、detectNetを使用するためのコンソールプログラムとカメラストリーミングプログラムが提供されています。
 
 ### Detection Data Formatting in DIGITS
 
-Example object detection datasets with include [KITTI](http://www.cvlibs.net/datasets/kitti/eval_object.php), [MS-COCO](http://mscoco.org/), and others.  To use the KITTI dataset follow this [DIGITS object detection tutorial with KITTI](https://github.com/NVIDIA/DIGITS/blob/digits-4.0/digits/extensions/data/objectDetection/README.md).
-
-Regardless of dataset, DIGITS uses KITTI metadata format for ingesting the detection bounding labels.  These consist of text files with frame numbers corresponding to image filenames, including contents such as:
+下記を含む物体検出データセットの例です
+ [KITTI](http://www.cvlibs.net/datasets/kitti/eval_object.php) 
+ [MS-COCO](http://mscoco.org/)
+ その他
+ 
+ KITTIデータセットを使用するには、[KITTIでのDIGITSオブジェクト検出チュートリアル]　(https://github.com/NVIDIA/DIGITS/blob/digits-4.0/digits/extensions/data/objectDetection/README.md)　を参照してください。
+ 
+データセットにかかわらず、DIGITSは検出境界ラベルを取り込むためにKITTIメタデータフォーマットを使用します。これらは、イメージファイル名に対応するフレーム番号を持つテキストファイルで構成されます。内容は次のとおりです。
 
 ```
 dog 0 0 0 528.63 315.22 569.09 354.18 0 0 0 0 0 0 0
