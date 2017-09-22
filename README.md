@@ -763,25 +763,26 @@ $ ./detectnet-console dog_0.jpg output_0.jpg \
 --output_bbox=bboxes
 ```
 
-> **note:**  the `input_blob`, `output_cvg`, and `output_bbox` arguments may be omitted if your DetectNet layer names match the defaults above (i.e. if you are using the prototxt from following this tutorial). These optional command line parameters are provided if you are using a customized DetectNet with different layer names.
+> **note:** DetectNetのレイヤ名が上記のデフォルトと一致する場合（つまり、このチュートリアルのプロトタイプを使用している場合）は、 `input_blob`、` output_cvg`、および `output_bbox`の引数を省略することができます。これらのオプションのコマンドラインパラメータは、異なるレイヤ名でカスタマイズされたDetectNetを使用している場合に提供されます。
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/detectnet-tensorRT-dog-0.jpg)
 
 #### Launching With a Pretrained Model
 
-Alternatively, to load one of the pretrained snapshots that comes with the repo, you can specify the pretrained model name as the 3rd argument to `detectnet-console`:
+レポに付属している事前に準備されたスナップショットの1つをロードするには、pretrainedモデル名を `detectnet-console`の3番目の引数として指定します：
 
 ``` bash
 $ ./detectnet-console dog_1.jpg output_1.jpg coco-dog
 ```
 
-The above command will process dog_1.jpg, saving it to output_1.jpg, using the pretrained DetectNet-COCO-Dog model.  This is a shortcut of sorts so you don't need to wait for the model to complete training if you don't want to.
+上記のコマンドは、dog_1.jpgを処理し、pre-Trained DetectNet-COCO-Dogモデルを使用してoutput_1.jpgに保存します。これは一種のショートカットです。そうしたくない場合は、モデルがトレーニングを完了するのを待つ必要はありません。
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/detectnet-tensorRT-dog-1.jpg)
 
 #### Pretrained DetectNet Models Available
 
-Below is a table of the pretrained DetectNet snapshots downloaded with the repo (located in the `data/networks` directory after running `cmake` step) and the associated argument to `detectnet-console` used for loading the pretrained model:
+下記は、本レポート（ `cmake`ステップを実行した後に` data / networks`ディレクトリにある）でダウンロードされたpretrained DetectNetスナップショットのテーブルと学習済みモデルの読み込みに使用される ` detectnet-console`　に関連する引数です。
+
 
 | DIGITS model            | CLI argument    | classes              |
 | ------------------------|-----------------|----------------------|
@@ -793,11 +794,11 @@ Below is a table of the pretrained DetectNet snapshots downloaded with the repo 
 | multiped-500            | `multiped`      | pedestrians, luggage |
 | facenet-120             | `facenet`       | faces                |
 
-These all also have the python layer patch above already applied.
+これらはすべて、すでに適用されているPythonのレイヤーパッチも持っています。
 
 #### Running Other MS-COCO Models on Jetson
 
-Let's try running some of the other COCO models.  The training data for these are all included in the dataset downloaded above.  Although the DIGITS training example above was for the coco-dog model, the same procedure can be followed to train DetectNet on the other classes included in the sample COCO dataset.
+他のCOCOモデルを試してみましょう。これらのトレーニングデータはすべて上記でダウンロードしたデータセットに含まれています。上記のDIGITSトレーニングの例はcoco-dog modelのものでしたが、サンプルCOCOデータセットに含まれる他のクラスでDetectNetをトレーニングする場合も同じ手順を実行できます。
 
 ``` bash
 $ ./detectnet-console bottle_0.jpg output_2.jpg coco-bottle
