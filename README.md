@@ -815,7 +815,7 @@ $ ./detectnet-console airplane_0.jpg output_3.jpg coco-airplane
 
 #### Running Pedestrian Models on Jetson
 
-Included in the repo are also DetectNet models pretrained to detect humans.  The `pednet` and `multiped` models recognized pedestrians while `facenet` recognizes faces (from [FDDB](http://vis-www.cs.umass.edu/fddb/)).  Here's an example of detecting multiple humans simultaneously in a crowded space:
+本レポートには、人間を検出するために事前に訓練されたDetectNetモデルも含まれています。`pednet`と` multiped`モデルは歩行者を認識し、 `facenet`は顔を認識します。（[FDDB](http://vis-www.cs.umass.edu/fddb/)）混雑したスペースで複数の人間を同時に検出する例を以下に示します。
 
 
 ``` bash
@@ -825,7 +825,7 @@ $ ./detectnet-console peds-007.png output_7.png multiped
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/detectnet-peds-00.jpg" width="900">
 
 ### Multi-class Object Detection Models
-When using the multiped model (`PEDNET_MULTI`), for images containing luggage or baggage in addition to pedestrians, the 2nd object class is rendered with a green overlay.
+歩行者に加えて荷物または手荷物を含む画像に対して乗算モデル（`PEDNET_MULTI`）を使用する場合、第2のオブジェクトクラスは緑色のオーバーレイでレンダリングされます。
 
 ``` bash
 $ ./detectnet-console peds-008.png output_8.png multiped
@@ -835,7 +835,7 @@ $ ./detectnet-console peds-008.png output_8.png multiped
 
 ### Running the Live Camera Detection Demo on Jetson
 
-Similar to the previous example, [`detectnet-camera`](detectnet-camera/detectnet-camera.cpp) runs the object detection networks on live video feed from the Jetson onboard camera.  Launch it from command line along with the type of desired network:
+前の例と同様に、 [`detectnet-camera`](detectnet-camera/detectnet-camera.cpp)は、Jetson搭載カメラからのライブビデオ入力で物体検出ネットワークを実行します。コマンドラインから目的のネットワークのタイプとともに起動します。
 
 ``` bash
 $ ./detectnet-camera coco-bottle    # detect bottles/soda cans in the camera
@@ -846,30 +846,29 @@ $ ./detectnet-camera facenet        # run using facial recognition network
 $ ./detectnet-camera                # by default, program will run using multiped
 ```
 
-> **note**:  to achieve maximum performance while running detectnet, increase the Jetson clock limits by running the script:
+> **note**:  detectnetの実行中に最大限のパフォーマンスを達成するには、スクリプトを実行してJetsonのクロック制限を上げます。
 >  `sudo ~/jetson_clocks.sh`
-
 <br/>
 
-> **note**:  by default, the Jetson's onboard CSI camera will be used as the video source.  If you wish to use a USB webcam instead, change the `DEFAULT_CAMERA` define at the top of [`detectnet-camera.cpp`](detectnet-camera/detectnet-camera.cpp) to reflect the /dev/video V4L2 device of your USB camera and recompile.  The webcam model it's tested with is Logitech C920.  
+> **note**:  デフォルトでは、JetsonのオンボードCSIカメラがビデオソースとして使用されます。デフォルトでは、JetsonのオンボードCSIカメラがビデオソースとして使用されます。オンボードカメラの代わりにUSBウェブカメラを使用する場合は、/ dev / video V4L2デバイスを反映するために、[`detectnet-camera.cpp`](detectnet-camera/detectnet-camera.cpp) の上部にある DEFAULT_CAMERA定義を変更してください。ここで使用したモデルはLogitech C920です。
 
 <br/>
 
 ## Image Segmentation with SegNet
 
-The third deep learning capability we're highlighting in this tutorial is image segmentation.  Segmentation is based on image recognition, except the classifications occur at the pixel level as opposed to classifying entire images as with image recognition.  This is accomplished by *convolutionalizing* a pre-trained imageNet recognition model (like Alexnet), which turns it into a fully-convolutional segmentation model capable of per-pixel labelling.  Useful for environmental sensing and collision avoidance, segmentation yields dense per-pixel classification of many different potential objects per scene, including scene foregrounds and backgrounds.
+このチュートリアルで紹介している第3のDeep Learningは、画像のセグメンテーションです。セグメンテーションは、画像認識のように画像全体を分類するのではなく、ピクセルレベルで分類が行われる画像認識です。これは、あらかじめ訓練されたイメージネット認識モデル（Alexnetなど）を*畳み込み*することで実現され、ピクセルごとのラベル付けが可能な完全畳み込みセグメンテーションモデルに変わります。環境感知と衝突回避に役立つセグメンテーションは、シーンの前景色や背景など、シーンごとにさまざまな潜在的なオブジェクトのピクセル毎の高密度化をもたらします。
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/segmentation-cityscapes.jpg)
 
-The [`segNet`](segNet.h) object accepts as input the 2D image, and outputs a second image with the per-pixel classification mask overlay.  Each pixel of the mask corresponds to the class of object that was classified.
+[`segNet`](segNet.h) オブジェクトは2D画像を入力として受け取り、ピクセルごとの分類マスクオーバーレイを持つ第2の画像を出力します。マスクの各ピクセルは、分類されたオブジェクトのクラスに対応します。
 
-> **note**:  see the DIGITS [semantic segmentation](https://github.com/NVIDIA/DIGITS/tree/master/examples/semantic-segmentation) example for more background info on segmentation.
+> **note**:  セグメント化の詳細については、DIGITS [semantic segmentation](https://github.com/NVIDIA/DIGITS/tree/master/examples/semantic-segmentation) の例を参照してください。
 
 ### Downloading Aerial Drone Dataset
 
-As an example of image segmentation, we'll work with an aerial drone dataset that separates ground terrain from the sky.  The dataset is in First Person View (FPV) to emulate the vantage point of a drone in flight and train a network that functions as an autopilot guided by the terrain that it senses.
+画像セグメンテーションの例として、地形を空から撮影するドローンのデータセットを使用します。データセットは、飛行中のドローンの視点をエミュレートし、それが感知している地形に基づいて自動操縦として機能するネットワークを訓練するために、ファーストパーソンビュー（FPV）になっています。
 
-To download and extract the dataset, run the following commands from the host PC running the DIGITS server:
+データセットをダウンロードして抽出するには、DIGITSサーバーを実行しているホストPCから次のコマンドを実行します。
 
 ``` bash
 $ wget --no-check-certificate https://nvidia.box.com/shared/static/ft9cc5yjvrbhkh07wcivu5ji9zola6i1.gz -O NVIDIA-Aerial-Drone-Dataset.tar.gz
@@ -885,15 +884,15 @@ NVIDIA-Aerial-Drone-Datase 100%[======================================>]   6.65G
 $ tar -xzvf NVIDIA-Aerial-Drone-Dataset.tar.gz 
 ```
 
-The dataset includes various clips captured from flights of drone platforms, but the one we'll be focusing on in this tutorial is under `FPV/SFWA`.  Next we'll create the training database in DIGITS before training the model.
+このデータセットにはドローンのフライトから捕捉されたさまざまなクリップが含まれていますが、このチュートリアルではFPV / SFWAに焦点を当てています。次に、モデルをトレーニングする前に、DIGITSでトレーニングデータベースを作成します。
 
 ### Importing the Aerial Dataset into DIGITS
 
-First, navigate your browser to your DIGITS server instance and choose to create a new `Segmentation Dataset` from the drop-down in the Datasets tab:
+最初に、ブラウザをDIGITSサーバインスタンスに移動し、データセットタブのドロップダウンから新しいセグメンテーションデータセットを作成することを選択します。
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/segmentation-digits-create-dataset.png" width="250">
 
-In the dataset creation form, specify the following options and paths to the image and label folders under the location where you extracted the aerial dataset:
+データセット作成フォームで、aerial データセットを抽出した場所の下にある画像フォルダとラベルフォルダへの次のオプションとパスを指定します。
 
 * Feature image folder:  `NVIDIA-Aerial-Drone-Dataset/FPV/SFWA/720p/images`
 * Label image folder:   `NVIDIA-Aerial-Drone-Dataset/FPV/SFWA/720p/labels`
@@ -905,13 +904,13 @@ In the dataset creation form, specify the following options and paths to the ima
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/segmentation-digits-aerial-dataset-options.png)
 
-Name the dataset whatever you choose and click the `Create` button at the bottom of the page to launch the importing job.  Next we'll create the new segmentation model and begin training.
+選択したデータセットに名前を付け、ページの下部にある`Create`ボタンをクリックして、インポートを開始します。次に、新しいセグメンテーションモデルを作成し、トレーニングを開始します。
 
 ### Generating Pretrained FCN-Alexnet
 
-Fully Convolutional Network (FCN) Alexnet is the network topology that we'll use for segmentation models with DIGITS and TensorRT.  See this [Parallel ForAll](https://devblogs.nvidia.com/parallelforall/image-segmentation-using-digits-5) article about the convolutionalizing process.  A new feature to DIGITS5 was supporting segmentation datasets and training models.  A script is included with the DIGITS semantic segmentation example which converts the Alexnet model into FCN-Alexnet.  This base model is then used as a pre-trained starting point for training future FCN-Alexnet segmentation models on custom datasets.
+完全畳み込みネットワーク（FCN）Alexnetは、DIGITSおよびTensorRTを使用したセグメンテーションモデルに使用するネットワークトポロジです。畳み込み処理については、この[Parallel ForAll](https://devblogs.nvidia.com/parallelforall/image-segmentation-using-digits-5) の記事を参照してください。DIGITS5の新機能はセグメンテーションデータセットとトレーニングモデルをサポートしています。スクリプトは、AlexnetモデルをFCN-Alexnetに変換するDIGITSセマンティックセグメンテーションの例に含まれています。この基本モデルは、カスタムデータセットの将来のFCN-Alexnetセグメンテーションモデルを学習するための事前学習された出発点として使用されます。
 
-To generate the pre-trained FCN-Alexnet model, open a terminal, navigate to the DIGITS semantic-segmantation example, and run the `net_surgery` script:
+あらかじめ学習されたFCN-Alexnetモデルを生成するには、端末を開き、DIGITSセマンティックセグメンテーションの例に移動し、 `net_surgery`スクリプトを実行します：
 
 ``` bash
 $ cd DIGITS/examples/semantic-segmentation
@@ -926,19 +925,19 @@ Saving FCN-Alexnet model to fcn_alexnet.caffemodel
 
 ### Training FCN-Alexnet with DIGITS
 
-When the previous data import job is complete, return to the DIGITS home screen.  Select the `Models` tab and choose to create a new `Segmentation Model` from the drop-down:
+データのインポートが完了したら、DIGITSのホーム画面に戻ります。`Models`タブを選択し、ドロップダウンから新しい`Segmentation Model` を作成することを選択します：
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/segmentation-digits-create-model.png" width="250">
 
-In the model creation form, select the dataset you previously created.  Set `Subtract Mean` to None and the `Base Learning Rate` to `0.0001`.  To set the network topology in DIGITS, select the `Custom Network` tab and make sure the `Caffe` sub-tab is selected.  Copy/paste the **[FCN-Alexnet prototxt](https://raw.githubusercontent.com/NVIDIA/DIGITS/master/examples/semantic-segmentation/fcn_alexnet.prototxt)** into the text box.  Finally, set the `Pretrained Model` to the output that the `net_surgery` generated above:  `DIGITS/examples/semantic-segmentation/fcn_alexnet.caffemodel`
+モデル作成フォームで、上記で作成したデータセットを選択します。`Subtract Mean`をNoneに、` Base Learning Rate`を `0.0001`に設定します。DIGITSでネットワークトポロジを設定するには、 `Custom Network`タブを選択し、` Caffe`サブタブが選択されていることを確認してください。 **[FCN-Alexnet prototxt](https://raw.githubusercontent.com/NVIDIA/DIGITS/master/examples/semantic-segmentation/fcn_alexnet.prototxt)**　をテキストボックスにコピー/ペーストします。最後に `Pretrained Model`を上記の` net_surgery`が生成した出力に設定します： `DIGITS / examples / semantic-segmentation / fcn_alexnet.caffemodel`
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/segmentation-digits-aerial-model-options.png)
 
-Give your aerial model a name and click the `Create` button at the bottom of the page to start the training job.  After about 5 epochs, the `Accuracy` plot (in orange) should ramp up and the model becomes usable:
+Aerialモデルに名前を付けて、ページの下部にある`Create`ボタンをクリックしてトレーニングを開始します。約5エポック後、「精度」プロット（オレンジ色）は上昇し、モデルは使用可能になります：
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/segmentation-digits-aerial-model-converge.png)
 
-At this point, we can try testing our new model's inference on some example images in DIGITS.
+この時点で、DIGITSのいくつかのサンプル画像について新しいモデルの推論をテストすることができます。
 
 ### Testing Inference Model in DIGITS
 
