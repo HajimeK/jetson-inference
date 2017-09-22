@@ -429,14 +429,11 @@ n01494475/
 ```
 上記のn+8つの数字列はクラスの **synset ID**　となります。クラスの名前文字列は、[`ilsvrc12_synset_words.txt`]（data / networks / ilsvrc12_synset_words.txt）で参照できます。たとえば、synset `n01484850 great white shark`などです。
 
-
-These 8-digit ID's prefixed wth N are referred to as the **synset ID** of the class.  The name string of the class can be looked up in [`ilsvrc12_synset_words.txt`](data/networks/ilsvrc12_synset_words.txt).  For example, synset `n01484850 great white shark`.
-
 ### Customizing the Object Classes
 
-The dataset that we downloaded in the previous step was used to train the default AlexNet and GoogleNet models with 1000 object classes from several core groups, including different species of birds, plants, fruit, and fish, dog and cat breeds, types of vehicles, ect.  For practicle purposes lets consider a companion to the GoogleNet model which recognizes a dozen core groups made up of the original 1000 classes (for example, instead of detecting 122 individual breeds of dogs, combining them all into one common `dog` class).  These 12 core groups may be more practical to use than 1000 individual synsets and combining across classes results in more training data and stronger classification for the group.
+前のステップでダウンロードしたデータセットは、鳥、植物、果物、魚、犬と猫の品種、車両の種類、魚の種類、魚の種類、魚の種類など、いくつかのコアグループの1000オブジェクトクラスを持つデフォルトのAlexNetとGoogleNetモデルを学習するために使用しました。実際の目的では、オリジナルの1000クラスからなる12個のコアグループを認識するGoogleNetモデルの仲間と考えることができます（例えば、122個の個々の犬種を検出し、すべてを共通の「犬」クラスにまとめます）。これらの12個のコアグループは、1000個の個々のsynsetsを使用するより実用的であり、クラス間で結合することにより、より多くのトレーニングデータとそのグループのより強力な分類が得られます。
 
-DIGITS expects the data in a hierarchy of folders, so we can create directories for the groups and then symbolically link to the synsets from ILSVRC12 downloaded above.  DIGITS will automatically combine images from all folders under the top-level groups.  The directory structure resembles the following, with the value in parenthesis indicates the number of classes used to make up the group and the value next to the arrows indicating the synset ID linked to.
+DIGITSはフォルダの階層内のデータ入力が必要なため、グループ用のディレクトリを作成し、上記でダウンロードしたILSVRC12のシンセットにシンボリックリンクすることができます。DIGITSは、最上位のグループの下にあるすべてのフォルダの画像を自動的に結合します。ディレクトリ構造は下記のようになります。括弧内の値は、グループを構成するために使用されるクラスの数とリンクされているシンセットIDを示す矢印の横の値を示します。
 
 ```
 ‣ ball/  (7)
@@ -462,7 +459,7 @@ DIGITS expects the data in a hierarchy of folders, so we can create directories 
 • sign/  (2)
 ```
 
-Since there are actually a lot of synsets linked to from ILSVRC12, we provide the **[`imagenet-subset.sh`](tools/imagenet-subset.sh)** script to generate the directory structure and links given the path to the dataset.  Run the folowing commands from the DIGITS server:
+実際にILSVRC12からリンクされているsynsetはたくさんあるので、私たちは、ディレクトリ構造からデータセットを生成する** [`imagenet-subset.sh`]（tools / imagenet-subset.sh）**　スクリプトを提供します。DIGITSサーバーから次のコマンドを実行します。
 
 ``` bash
 $ wget https://rawgit.com/dusty-nv/jetson-inference/master/tools/imagenet-subset.sh
@@ -471,7 +468,7 @@ $ mkdir 12_classes
 $ ./imagenet-subset.sh /opt/datasets/imagenet/ilsvrc12 12_classes
 ```
 
-In this example the links are created in the `12_classes` folder, with the first argument to the script being the path to ILSVRC12 downloaded in the previous step. 
+この例では、リンクは `12_classes`フォルダに作成され、スクリプトの最初の引数は前の手順でダウンロードしたILSVRC12へのパスです。
 
 ### Importing Classification Dataset into DIGITS
 
