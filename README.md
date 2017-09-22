@@ -941,21 +941,21 @@ Aerialモデルに名前を付けて、ページの下部にある`Create`ボタ
 
 ### Testing Inference Model in DIGITS
 
-Before transfering the trained model to Jetson, let's test it first in DIGITS.  On the same page as previous plot, scroll down under the `Trained Models` section.  Set the `Visualization Model` to *Image Segmentation* and under `Test a Single Image`, select an image to try (for example `/NVIDIA-Aerial-Drone-Dataset/FPV/SFWA/720p/images/0428.png`):
+学習されたモデルをJetsonに転送する前に、まずDIGITSでテストしてみましょう。前のプロットと同じページで、`Trained Models` セクションの下にスクロールします。 `Visualization Model`を*Image Segmentation*　に設定し、` Test a Single Image`の下で試してみる画像を選択してください（例　`/ NVIDIA-Aerial-Drone-Dataset / FPV / SFWA / 720p / images / 0428.png`
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/segmentation-digits-aerial-visualization-options.png" width="350">
 
-Press `Test One` and you should see a display similar to:
+`Test One`を押すと、次のような画面が表示されます：
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/segmentation-digits-aerial-infer.png)
 
-Next, download and extract the trained model snapshot to Jetson.
+次に、学習されたモデルスナップショットをダウンロードしてJetsonに抽出します。
 
 ### FCN-Alexnet Patches for TensorRT
 
-There exist a couple non-essential layers included in the original FCN-Alexnet which aren't supported in TensorRT and should be deleted from the `deploy.prototxt` included in the snapshot. 
+元のFCN-Alexnetには、TensorRTではサポートされていないいくつか不要な層が存在し、スナップショットに含まれる `deploy.prototxt`から削除する必要があります。
 
-At the end of `deploy.prototxt`, delete the deconv and crop layers:
+`deploy.prototxt`の最後のdeconvとcropのレイヤーを削除します：
 
 ```
 layer {
@@ -989,14 +989,13 @@ layer {
   }
 }
 ```
-
-And on line 24 of `deploy.prototxt`, change `pad: 100` to `pad: 0`.  Finally copy the `fpv-labels.txt` and `fpv-deploy-colors.txt` from the aerial dataset to your model snapshot folder on Jetson.  Your FCN-Alexnet model snapshot is now compatible with TensorRT.  Now we can run it on Jetson and perform inference on images.
+`deploy.prototxt`の24行目で` pad：100`を `pad：0`に変更します。最後に、aerialのデータセットの `fpv-labels.txt`と` fpv-deploy-colors.txt`をJetsonのモデルスナップショットフォルダにコピーします。FCN-Alexnetモデルのスナップショットは、TensorRTと互換性があります。今我々はJetsonでそれを実行し、画像の推論を行うことができます。
 
 ### Running Segmentation Models on Jetson
 
-To test a custom segmentation network model snapshot on the Jetson, use the command line interface to test the segnet-console program.
+Jetsonでカスタムセグメンテーションネットワークモデルのスナップショットをテストするには、コマンドラインインターフェイスを使用してsegnet-consoleプログラムをテストします。
 
-First, for convienience, set the path to your extracted snapshot into a `$NET` variable:
+まず、抽出したスナップショットのパスを `$ NET`変数に設定します：
 
 ``` bash
 $ NET=20170421-122956-f7c0_epoch_5.0
@@ -1010,16 +1009,15 @@ $ ./segnet-console drone_0428.png output_0428.png \
 --output_blob=score_fr
 ```
 
-This runs the specified segmentation model on a test image downloaded with the repo.
+これにより、レポと共にダウンロードされたテストイメージ上で、指定されたセグメンテーションモデルが実行されます。
 
 ![Alt text](https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/segmentation-aerial-tensorRT.png)
 
-In addition to the pre-trained aerial model from this tutorial, the repo also includes pre-trained models on other segmentation datasets, including **[Cityscapes](https://www.cityscapes-dataset.com/)**, **[SYNTHIA](http://synthia-dataset.net/)**, and **[Pascal-VOC](http://host.robots.ox.ac.uk/pascal/VOC/)**.
-
+このチュートリアルの事前学習された航空モデルに加え、**[Cityscapes](https://www.cityscapes-dataset.com/)**, **[SYNTHIA](http://synthia-dataset.net/)**, and **[Pascal-VOC](http://host.robots.ox.ac.uk/pascal/VOC/)**　などの他のセグメンテーションデータセットの事前訓練モデルも含まれています。
 
 ## Extra Resources
 
-In this area, links and resources for deep learning developers are listed:
+ここでは、Deep Learning開発者のためのリンクが記載されています。
 
 * [Appendix](docs/aux-contents.md)
 	* [NVIDIA Deep Learning Institute](https://developer.nvidia.com/deep-learning-institute) — [Introductory QwikLabs](https://developer.nvidia.com/deep-learning-courses)
