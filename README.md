@@ -821,7 +821,7 @@ $ ./detectnet-console airplane_0.jpg output_3.jpg coco-airplane
 
 
 ``` bash
-$ ./detectnet-console peds-007.png output_7.png multiped
+$ ./detectnet-console peds-004.jpg output-4.jpg multiped
 ```
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/detectnet-peds-00.jpg" width="900">
@@ -830,7 +830,7 @@ $ ./detectnet-console peds-007.png output_7.png multiped
 歩行者に加えて荷物または手荷物を含む画像に対して乗算モデル（`PEDNET_MULTI`）を使用する場合、第2のオブジェクトクラスは緑色のオーバーレイでレンダリングされます。
 
 ``` bash
-$ ./detectnet-console peds-008.png output_8.png multiped
+$ ./detectnet-console peds-003.jpg output-3.jpg multiped
 ```
 
 <img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/detectnet-peds-01.jpg" width="900">
