@@ -833,8 +833,6 @@ $ ./detectnet-console peds-004.jpg output-4.jpg multiped
 $ ./detectnet-console peds-003.jpg output-3.jpg multiped
 ```
 
-<img src="https://github.com/dusty-nv/jetson-inference/raw/master/docs/images/detectnet-peds-01.jpg" width="900">
-
 ### Running the Live Camera Detection Demo on Jetson
 
 前の例と同様に、 [`detectnet-camera`](detectnet-camera/detectnet-camera.cpp)は、Jetson搭載カメラからのライブビデオ入力で物体検出ネットワークを実行します。コマンドラインから目的のネットワークのタイプとともに起動します。
